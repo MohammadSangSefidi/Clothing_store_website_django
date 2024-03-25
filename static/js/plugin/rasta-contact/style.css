@@ -1,0 +1,225 @@
+/*
+
+ Version: 1.0.0
+  Author: Amir Rezaie
+ Website:
+    Repo: https://amir-rezaie.ir
+ */
+
+
+a._collapz_parant._close:after {
+    content: "\F618";
+    font-family: bootstrap-icons, serif !important;
+    font-size: 30px;
+    position: relative;
+    top: 8px;
+    font-style: normal;
+    color: #fff;
+    transition: 0.3s;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -ms-transition: 0.3s;
+    -o-transition: 0.3s;
+}
+
+a._collapz_parant._open:after {
+    content: "\F62A";
+    font-family: bootstrap-icons !important;
+    font-size: 30px;
+    position: relative;
+    top: 8px;
+    font-style: normal;
+    color: #fff;
+    transition: 0.3s;
+}
+
+a._collapz_parant {
+    color: #fff;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: block;
+    text-decoration: none;
+    float: right;
+    -webkit-transition: -webkit-transform .1s linear 0ms;
+    -moz-transition: -moz-transform .1s linear 0ms;
+    transition: transform .1s linear 0ms;
+    /* transform: rotate(44deg); */
+}
+
+a._collapz_parant._close {
+    background-color: #e45353;
+}
+
+a._collapz_parant._close:after {
+    left: 0;
+}
+
+a._collapz_parant._open {
+    background-color: #2f353e;
+}
+
+ul._child_collapzion {
+    padding-right: 0;
+    width: 300px;
+    background: #fff;
+    position: absolute;
+    margin: 0;
+    list-style: none;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    z-index: 10;
+    -webkit-transform: translate3d(0, -100%, 0);
+    -moz-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    -webkit-transition: -webkit-transform .3s ease-in-out;
+    -moz-transition: -moz-transform .3s ease-in-out;
+    transition: transform .3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+ul._child_collapzion li a._collapz_child {
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    background-color: #e45353;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+ul._child_collapzion li {
+    padding-bottom: 5px;
+    width: 100%;
+    border-bottom: 1px dashed #ddd;
+    transition: 0.3s ease;
+    -webkit-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    -ms-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+}
+
+ul._child_collapzion li:hover{
+    background-color: #0763f641;
+}
+
+ul._child_collapzion li:hover a{
+    color: #515151;
+}
+
+
+ul._child_collapzion li:nth-last-child(1){
+    margin-bottom: 0;
+    border-bottom: none;
+
+}
+
+ul._child_collapzion li a._collapz_child i {
+    font-size: 18px;
+    color: #fff;
+}
+
+ul._child_collapzion li span._title {
+    position: relative;
+    left: 8px;
+    top: -6px;
+    padding: 3px;
+    font-size: 14px;
+    padding-right: 10px;
+}
+
+._col_shadow {
+    box-shadow: 0 4px 17px 0 rgba(0, 0, 0, .14), 0 1px 32px 0 rgba(0, 0, 0, .12), 0 2px 9px -1px rgba(0, 0, 0, .2);
+}
+
+.float-contact{
+    text-align: right;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.float-contact .icon {
+    width: 40px;
+    height: 40px;
+    background: #FFA41B;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.float-contact .icon i{
+    color: #fff;
+}
+
+li:nth-child(2) .float-contact .icon{
+    background: #288eff;
+}
+
+li:nth-child(2) .float-contact .icon i{
+    color: #fff;
+}
+li:nth-child(3) .float-contact .icon{
+    background: #0b8502;
+}
+
+.float-contact .icon i {
+    font-size: 20px;
+    display: inherit;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgb(0 0 0 / 50%);
+    z-index: 800;
+    transition: 0.7s;
+    height: 100%;
+}
+
+.contactFire {
+    transform: scale(1);
+    animation: pulse 3s infinite;
+    transition: 0.3s all ease-in-out;
+    animation-delay: 10s;
+}
+
+
+@keyframes pulse {
+	0% {
+        box-shadow: 0 0 0 0 rgba(1, 106, 13, 0.775);
+	}
+
+	70% {
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+	}
+
+	100% {
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+	}
+}
