@@ -70,16 +70,16 @@ html {
 
 :root {
     /* theme color */
-    --main-color-one: #66cb17;
-    --main-color-one-shadow: #66cb1751;
-    --main-color-one-hover: #5fc312;
+    --main-color-one: #91157E;
+    --main-color-one-shadow: #65195E;
+    --main-color-one-hover: #C246C6;
     --main-color-two: #F1F4F8FF;
     --main-color-two-shadow: #F1F4F851;
     --main-color-two-hover: #b3b4b6;
     --main-color-three: #1246a2;
     --main-color-three-shadow: #3f3f3f;
     --main-color-three-hover: #424141;
-    --main-color-green: #189D0E;
+    --main-color-green: #91157E;
     --bg-site: #fcfcfc;
     /* typography */
     --font-size: 14px;
@@ -4244,4 +4244,10 @@ div.countdown-bar div:nth-of-type(2) span {
 
 .margin{
     margin-right: 10px;
+}
+.header-item{
+    height: 30px;
+}
+.padding{
+    padding-top: 60px;
 }

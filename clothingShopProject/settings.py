@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'django_render_partial',
     'homeModule',
-    'productsModule'
+    'productsModule',
+    'usersModule'
 ]
 
 MIDDLEWARE = [
@@ -76,6 +79,8 @@ WSGI_APPLICATION = 'clothingShopProject.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+
+AUTH_USER_MODEL = 'usersModule.UsersModel'
 
 DATABASES = {
     'default': {

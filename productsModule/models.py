@@ -3,12 +3,16 @@ from django.db import models
 
 class CategoryModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
-    slug = models.SlugField(verbose_name='عنوان در Url')
+    parent = models.ForeignKey('CategoryModel', on_delete=models.CASCADE, null=True, blank=True,
+                               verbose_name='دسته بندی اصلی')
+    slug = models.SlugField(unique=True, allow_unicode=True, verbose_name='عنوان در Url')
     isActive = models.BooleanField(verbose_name='فعال/غیر فعال')
     isDelete = models.BooleanField(verbose_name='حذف شود/حذف نشود')
 
     def __str__(self):
-        return f'{self.title}دسته بندی : '
+        if self.parent == None:
+            return f'دسته بندی : {self.title}'
+        return f'دسته بندی : {self.title} - زیر دسته : {self.parent.title}'
 
     class Meta:
         verbose_name = 'دسته بندی'
@@ -17,12 +21,12 @@ class CategoryModel(models.Model):
 
 class ColorModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
-    slug = models.SlugField(verbose_name='عنوان در Url')
+    slug = models.SlugField(unique=True, allow_unicode=True, verbose_name='عنوان در Url')
     isActive = models.BooleanField(verbose_name='فعال/غیر فعال')
     isDelete = models.BooleanField(verbose_name='حذف شود/حذف نشود')
 
     def __str__(self):
-        return f'{self.title}رنگ : '
+        return f'رنگ : {self.title}'
 
     class Meta:
         verbose_name = 'رنگ'
@@ -31,12 +35,12 @@ class ColorModel(models.Model):
 
 class SizeModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
-    slug = models.SlugField(verbose_name='عنوان در Url')
+    slug = models.SlugField(unique=True, allow_unicode=True, verbose_name='عنوان در Url')
     isActive = models.BooleanField(verbose_name='فعال/غیر فعال')
     isDelete = models.BooleanField(verbose_name='حذف شود/حذف نشود')
 
     def __str__(self):
-        return f'{self.title}سایز : '
+        return f'سایز : {self.title}'
 
     class Meta:
         verbose_name = 'سایز'
@@ -46,13 +50,12 @@ class SizeModel(models.Model):
 class ProductsModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
     price = models.IntegerField(verbose_name='قیمت')
-    description = models.TextField(blank=True, null=True, verbose_name='توضیحات')
     discount = models.IntegerField(null=True, verbose_name='درصد تخفیف')
     count = models.IntegerField(verbose_name='تعداد در انبار')
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, verbose_name='دسته بندی')
-    color = models.ManyToManyField(ColorModel, verbose_name='رنگ ها')
-    size = models.ForeignKey(SizeModel, on_delete=models.CASCADE, verbose_name='سایز')
-    slug = models.SlugField(verbose_name='عنوان در Url')
+    color = models.ManyToManyField(ColorModel, verbose_name='رنگ ها', blank=True)
+    size = models.ManyToManyField(SizeModel, verbose_name='سایز', blank=True)
+    slug = models.SlugField(unique=True, allow_unicode=True, verbose_name='عنوان در Url')
     isActive = models.BooleanField(verbose_name='فعال/غیر فعال')
     isDelete = models.BooleanField(verbose_name='حذف شود/حذف نشود')
 

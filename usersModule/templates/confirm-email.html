@@ -1,0 +1,88 @@
+{% extends 'base/_layout.html' %}
+
+{% block title %}
+    تایید ایمیل
+{% endblock %}
+
+{% block content %}
+    <!-- start content -->
+
+    <div class="content">
+        <div class="container-fluid">
+            <div class="auth">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="content-box p-3">
+                            <form method="post" >
+                                {% csrf_token %}
+                                <div class="alert text-center alert-success">
+                                    یک کد به ایمیل شما ارسال شد لطفا آن را وارد کنید
+                                </div>
+
+                                <div id="otp-input">
+                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no"
+                                           pattern="\d*"/>
+                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no"
+                                           pattern="\d*"/>
+                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no"
+                                           pattern="\d*"/>
+                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no"
+                                           pattern="\d*"/>
+                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no"
+                                           pattern="\d*"/>
+                                    <input placeholder="_" type="number" step="1" min="0" max="9" autocomplete="no"
+                                           pattern="\d*"/>
+                                    <input id="otp-value" placeholder="_" type="hidden" name="otp"/>
+                                </div>
+
+                                <p id="confirm-email-error" class="text-danger text-center"></p>
+
+                                <!-- Countdown timer html -->
+                                <div class="countDownContainer">
+                                    <div class="countdown-bar" id="countdownB">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group mt-4">
+                                    <button id="submit" type="submit" class="btn main-color-one-bg w-100 py-3">
+                                        تایید
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer-references %}
+    <script src="/static/js/plugin/otp-sms/otp-input.js"></script>
+    <script src="/static/js/plugin/otp-loader/script.js"></script>
+
+    <!-- Run Countdown Timer Script -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            countdown('countdownB', 0, 0, 0, 60);
+        });
+    </script>
+    <!-- End script -->
+
+
+    <!-- otp input callback -->
+
+
+    <script>
+        const continueButton = document.querySelector("#submit");
+        continueButton.addEventListener("click", (e) => {
+            {#updateValue(inputs);#}
+            {#alert(OTPValueContainer.value);#}
+        });
+    </script>
+{#    <script src="/static/js/data/userModule-js/confirm-email.js"></script>#}
+{% endblock %}

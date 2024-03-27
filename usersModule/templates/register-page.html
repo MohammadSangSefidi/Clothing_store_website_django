@@ -1,0 +1,134 @@
+{% extends 'base/_layout.html' %}
+
+{% block title %}
+    ورود
+{% endblock %}
+ 
+{% block content %}
+    <!-- start content -->
+
+    <div class="content">
+        <div class="container-fluid padding">
+            <div class="auth">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4">
+                        <div class="content-box auth-front auth-front-reg">
+                            <div class="container-fluid">
+                                <div class="auth-action text-center">
+                                    <a href="{% url 'loginPage' %}" class="btn btn-lg font-18">ورود به سایت</a>
+                                    <a href="{% url 'registerPage' %}" class="btn btn-lg bg-white shadow-md fw-bold font-18 ms-2">عضویت
+                                        در سایت</a>
+                                </div>
+
+                                <div class="auth-form mt-80 py-4">
+                                    <form method="post" action="">
+                                        {% csrf_token %}
+                                        <div class="mb-4 form-avatar text-center">
+                                            <img src="/static/img/user-avatar.svg" width="100" alt="">
+                                        </div>
+
+                                        <div class="comment-item mb-3">
+                                            <input type="text" class="form-control" id="floatingInputUsername">
+                                            <label for="floatingInputUsername" class="form-label label-float">
+                                                یک نام کاربری وارد کنیم
+                                            </label>
+                                        </div>
+
+
+                                        <div class="comment-item mb-3">
+                                            <input type="email" class="form-control" id="floatingInputEmail">
+                                            <label for="floatingInputEmail" class="form-label label-float">ایمیل خود را
+                                                وارد
+                                                کنید</label>
+                                        </div>
+
+                                        <div class="comment-item mt-4 position-relative">
+                                            <input type="password" class="form-control" id="floatingInputPasswd">
+                                            <label for="floatingInputPasswd" class="form-label label-float">رمز عبور خود
+                                                را
+                                                وارد
+                                                کنید</label>
+                                        </div>
+
+                                        <div class="comment-item mt-4 position-relative">
+                                            <input type="password" class="form-control" id="floatingInputPasswdRe">
+                                            <label for="floatingInputPasswdRe" class="form-label label-float">رمز عبور
+                                                خود را تکرار
+                                                کنید</label>
+                                        </div>
+
+                                        <p class="text-danger text-center my-md-1" id="register-error"></p>
+
+{#                                        <div class="form-check my-4">#}
+{#                                        </div>#}
+
+                                        <div class="form-group mb-0">
+                                            <button type="submit" class="btn main-color-one-bg w-100 py-3" id="register-button">
+                                                ثبت نام در سایت
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end content -->
+
+    <br><br><br><br><br><br><br>
+
+
+    <!-- start mobile menu fixed -->
+
+{#    <div class="mobile-footer d-lg-none d-table justify-content-center shadow-box bg-white position-fixed bottom-0 p-2 w-100"#}
+{#         style="z-index: 100;table-layout: fixed;">#}
+{#        <ul class="d-table-row">#}
+{#            <li class="d-table-cell pointer" onclick="topFunction()">#}
+{#                <div class="mf-link nav-link text-center">#}
+{#                    <span class="d-block mf-link-icon"><i class="bi bi-chevron-up font-20"></i></span>#}
+{#                    <span class="mt-1 font-12 fw-bold mf-link-title">بالا</span>#}
+{#                </div>#}
+{#            </li>#}
+{#            <li class="d-table-cell"><a href="" class="mf-link nav-link text-center">#}
+{#                <div class="mf-link-icon position-relative d-table mx-auto">#}
+{#                    <i class="bi bi-heart font-20"></i>#}
+{#                    <span class="position-absolute main-color-one-bg rounded-pill font-10 text-white badge"#}
+{#                          style="right:-40%;bottom:-5px;">0</span>#}
+{#                </div>#}
+{#                <span class="mt-1 font-12 fw-bold mf-link-title">علاقه مندی ها</span>#}
+{#            </a></li>#}
+{#            <li class="d-table-cell"><a href="" class="mf-link nav-link text-center">#}
+{#                <span class="d-block mf-link-icon"><i class="bi bi-house font-20"></i></span>#}
+{#                <span class="mt-1 font-12 fw-bold mf-link-title">صفحه اصلی</span>#}
+{#            </a></li>#}
+{#            <li class="d-table-cell"><a href="" class="mf-link nav-link text-center">#}
+{#                <div class="position-relative mf-link-icon d-table mx-auto">#}
+{#                    <span class="d-block mf-link-icon"><i class="bi bi-arrow-left-right font-20"></i></span>#}
+{#                    <span class="position-absolute main-color-one-bg rounded-pill font-10 text-white badge"#}
+{#                          style="right:-60%;bottom:-5px;">0</span>#}
+{#                </div>#}
+{#                <span class="mt-1 font-12 fw-bold mf-link-title">مقایسه</span>#}
+{#            </a></li>#}
+{#            <li class="d-table-cell"><a class="mf-link nav-link text-center" data-bs-toggle="offcanvas"#}
+{#                                        href="#offcanvasCart" role="button" aria-controls="offcanvasCart">#}
+{#                <div class="position-relative mf-link-icon d-table mx-auto">#}
+{#                    <span class="d-block mf-link-icon"><i class="bi bi-bag font-20"></i></span>#}
+{#                    <span class="position-absolute main-color-one-bg rounded-pill font-10 text-white badge"#}
+{#                          style="right:-60%;bottom:-5px;">0</span>#}
+{#                </div>#}
+{#                <span class="mt-1 font-12 fw-bold mf-link-title">سبد خرید</span>#}
+{#            </a></li>#}
+{#        </ul>#}
+{#    </div>#}
+
+    <!-- /mobile menu fixed -->
+{% endblock %}
+
+{% block footer-references %}
+    <script src="/static/js/data/userModule-js/register.js"></script>
+{% endblock %}

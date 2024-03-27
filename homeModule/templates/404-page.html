@@ -1,0 +1,27 @@
+{% extends 'base/_layout.html' %}
+
+{% block title %}
+    صفحه پیدا نشد
+{% endblock %}
+
+{% block content %}
+    <!-- start content -->
+
+    <div class="content mt-3">
+        <div class="container-fluid">
+            <div class="content-box">
+                <div class="container-fluid">
+                    <div class="text-center">
+                        <img src="/static/img/404.png" alt="">
+                        <h4 class="my-4 mt-5">صفحه‌ای که دنبال آن بودید پیدا نشد!</h4>
+                        <a href="{% url 'home-url' %}" class="btn main-color-one-bg">صفحه اصلی</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- /content -->
+{% endblock %}
