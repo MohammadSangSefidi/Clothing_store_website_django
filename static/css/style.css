@@ -526,7 +526,15 @@ a {
     font-family: var(--main-font);
     font-weight: normal;
 }
-
+.white-label {
+    padding: 5px 10px;
+    background-color: rgb(255, 255, 255);
+    color: #ffffff;
+    font-size: 13px;
+    display: inline-block;
+    font-family: var(--main-font);
+    font-weight: normal;
+}
 .success-label {
     padding: 5px 10px;
     background-color: #6dfc9d3b;
@@ -1090,8 +1098,8 @@ a {
 .slider-category-item-image {
     position: absolute;
     left: -14px;
-    transform: rotate(10deg);
-    transition: 0.3s all linear;
+    /*transform: rotate(10deg);*/
+    /*transition: 0.3s all linear;*/
     bottom: -14px;
 }
 
@@ -4250,4 +4258,10 @@ div.countdown-bar div:nth-of-type(2) span {
 }
 .padding{
     padding-top: 60px;
+}
+.hide-div{
+    display: none;!important;
+}
+.margin-div{
+    margin-bottom: 15px;
 }

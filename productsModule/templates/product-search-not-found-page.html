@@ -1,0 +1,218 @@
+{% extends 'base/_layout.html' %}
+
+{% block title %}
+    جستجو
+{% endblock %}
+
+{% block content %}
+    <!-- start content -->
+
+    <div class="content mt-3">
+        <div class="container-fluid">
+            <div class="row">
+{#                <div class="col-lg-3">#}
+{#                    <div class="position-sticky top-0 mb-5">#}
+{#                        <div class="category-meta">#}
+{#                            <div class="category-meta-title d-flex align-items-center">#}
+{#                                <h5>لوازم‌ تحریر</h5>#}
+{#                                <h5 class="ms-2">(17,604 محصول)</h5>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="category-bread mt-2">#}
+{#                            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">#}
+{#                                <ol class="breadcrumb">#}
+{#                                    <li class="breadcrumb-item"><a href="#">خانه</a></li>#}
+{#                                    <li class="breadcrumb-item active" aria-current="page">لوازم تحریر</li>#}
+{#                                </ol>#}
+{#                            </nav>#}
+{#                        </div>#}
+{#                        <div class="item-boxs">#}
+{#                            <div class="item-box shadow-box">#}
+{#                                <div class="title">#}
+{#                                    <div class="d-flex align-items-center justify-content-between">#}
+{#                                        <h6 class="font-14">فیلتر های اعمال شده</h6>#}
+{#                                        <a class="btn border-0" data-bs-toggle="collapse" href="#collapseItemBox"#}
+{#                                           role="button" aria-expanded="false">#}
+{#                                            <i class="bi bi-chevron-down"></i>#}
+{#                                        </a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                                <div class="desc collapse show" id="collapseItemBox">#}
+{#                                    <a href="" class="btn btn-sm rounded-pill border-1 border-muted me-1 font-14 mb-2">#}
+{#                                        <span>گوشی الجی</span>#}
+{#                                        <span class="ms-3"><i class="bi bi-x text-danger"></i></span></a>#}
+{#                                    <a href="" class="btn btn-sm rounded-pill border-1 border-muted me-1 font-14 mb-2">#}
+{#                                        <span>دوربین 108</span>#}
+{#                                        <span class="ms-3"><i class="bi bi-x text-danger"></i></span></a>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="item-box shadow-box">#}
+{#                                <div class="title">#}
+{#                                    <div class="form-check form-switch  form-sw-custom">#}
+{#                                        <div class="d-flex align-items-center justify-content-end flex-row-reverse">#}
+{#                                            <label class="form-check-label d-block mb-0 lh-base fs-6"#}
+{#                                                   for="flexSwitchCheckDefault">نمایش کالاهای موجود</label>#}
+{#                                            <input class="form-check-input d-block" type="checkbox" role="switch"#}
+{#                                                   id="flexSwitchCheckDefault">#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div class="item-box shadow-box">#}
+{#                                <div class="accordion accordion-flush" id="accordionFlushExample">#}
+{#                                    <div class="accordion-item">#}
+{#                                        <h2 class="accordion-header">#}
+{#                                            <button class="accordion-button collapsed f-800" type="button"#}
+{#                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"#}
+{#                                                    aria-expanded="false" aria-controls="flush-collapseOne">#}
+{#                                                جستجو#}
+{#                                            </button>#}
+{#                                        </h2>#}
+{#                                        <div id="flush-collapseOne" class="accordion-collapse collapse"#}
+{#                                             data-bs-parent="#accordionFlushExample">#}
+{#                                            <div class="accordion-body">#}
+{#                                                <div class="search-form">#}
+{#                                                    <form action="">#}
+{#                                                        <div class="search-filed">#}
+{#                                                            <input type="text" placeholder="محصول خود را جستجو کنید"#}
+{#                                                                   class="form-control search-input">#}
+{#                                                            <button type="submit" class="top-header-search-btn">#}
+{#                                                                <svg xmlns="http://www.w3.org/2000/svg" width="14"#}
+{#                                                                     height="14" viewBox="0 0 14 14" fill="none">#}
+{#                                                                    <path d="M12.9742 12.1508L12.9742 12.1508L11.2255 10.4458C12.1333 9.42855 12.6838 8.09702 12.6838 6.63956C12.6838 3.43893 10.0316 0.85 6.76692 0.85C3.50227 0.85 0.85 3.43893 0.85 6.63956C0.85 9.84018 3.50227 12.4291 6.76692 12.4291C8.11591 12.4291 9.36008 11.9872 10.3557 11.243L12.1375 12.9806L12.1372 12.9809L12.1456 12.9879L12.1955 13.0299L12.1952 13.0302L12.2042 13.0367C12.4363 13.2047 12.7646 13.1861 12.9753 12.9795C13.2087 12.7507 13.2081 12.3789 12.9742 12.1508ZM2.03826 6.63956C2.03826 4.09064 4.15218 2.01864 6.76692 2.01864C9.38167 2.01864 11.4956 4.09064 11.4956 6.63956C11.4956 9.18848 9.38167 11.2605 6.76692 11.2605C4.15218 11.2605 2.03826 9.18848 2.03826 6.63956Z"#}
+{#                                                                          fill="#0E1935" stroke="#0E1935"#}
+{#                                                                          stroke-width="0.3"></path>#}
+{#                                                                </svg>#}
+{#                                                            </button>#}
+{#                                                        </div>#}
+{#                                                    </form>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="accordion-item">#}
+{#                                        <h2 class="accordion-header">#}
+{#                                            <button class="accordion-button collapsed f-800" type="button"#}
+{#                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"#}
+{#                                                    aria-expanded="false" aria-controls="flush-collapseTwo">#}
+{#                                                محدوده قیمت#}
+{#                                            </button>#}
+{#                                        </h2>#}
+{#                                        <div id="flush-collapseTwo" class="accordion-collapse collapse"#}
+{#                                             data-bs-parent="#accordionFlushExample">#}
+{#                                            <div class="accordion-body">#}
+{#                                                <form action="" method="get">#}
+{#                                                    <div class="form-group">#}
+{#                                                        <input type="range" class="catRange" name="range[]">#}
+{#                                                    </div>#}
+{#                                                    <div class="row">#}
+{#                                                        <div class="col-6">#}
+{#                                                            <input type="number" name="" min="1500000"#}
+{#                                                                   class="form-control input-range-filter"#}
+{#                                                                   placeholder="از 1500000">#}
+{#                                                        </div>#}
+{#                                                        <div class="col-6">#}
+{#                                                            <input type="number" name="" min="1500000" max="3000000"#}
+{#                                                                   class="form-control input-range-filter"#}
+{#                                                                   placeholder="از 3000000">#}
+{#                                                        </div>#}
+{#                                                        <div class="col-12">#}
+{#                                                            <div class="text-center my-3">#}
+{#                                                                <input type="submit"#}
+{#                                                                       class="btn main-color-green text-white rounded-pill px-5 py-2"#}
+{#                                                                       value="اعمال فیلتر">#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </form>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    <div class="accordion-item">#}
+{#                                        <h2 class="accordion-header">#}
+{#                                            <button class="accordion-button collapsed f-800" type="button"#}
+{#                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseThree"#}
+{#                                                    aria-expanded="false" aria-controls="flush-collapseThree">#}
+{#                                                دسته بندی#}
+{#                                            </button>#}
+{#                                        </h2>#}
+{#                                        <div id="flush-collapseThree" class="accordion-collapse collapse"#}
+{#                                             data-bs-parent="#accordionFlushExample">#}
+{#                                            <div class="accordion-body">#}
+{#                                                <form action="">#}
+{#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
+{#                                                        <div class="form-check">#}
+{#                                                            <label for="colorCheck111" class="form-check-label">موبایل#}
+{#                                                                <i class="bi bi-phone ms-1"></i></label>#}
+{#                                                            <input type="checkbox" name="" id="colorCheck111"#}
+{#                                                                   class="form-check-input">#}
+{#                                                        </div>#}
+{#                                                        <div>#}
+{#                                                            <span class="fw-bold font-14">(27)</span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
+{#                                                        <div class="form-check">#}
+{#                                                            <label for="colorCheck555" class="form-check-label">ایرپاد#}
+{#                                                                <i class="bi bi-earbuds ms-1"></i></label>#}
+{#                                                            <input type="checkbox" name="" id="colorCheck555"#}
+{#                                                                   class="form-check-input">#}
+{#                                                        </div>#}
+{#                                                        <div>#}
+{#                                                            <span class="fw-bold font-14">(32)</span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
+{#                                                        <div class="form-check">#}
+{#                                                            <label for="colorCheck444" class="form-check-label">تبلت <i#}
+{#                                                                    class="bi bi-tablet ms-1"></i></label>#}
+{#                                                            <input type="checkbox" name="" id="colorCheck444"#}
+{#                                                                   class="form-check-input">#}
+{#                                                        </div>#}
+{#                                                        <div>#}
+{#                                                            <span class="fw-bold font-14">(14)</span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
+{#                                                        <div class="form-check">#}
+{#                                                            <label for="colorCheck333" class="form-check-label">هدست <i#}
+{#                                                                    class="bi bi-headset ms-1"></i></label>#}
+{#                                                            <input type="checkbox" name="" id="colorCheck333"#}
+{#                                                                   class="form-check-input">#}
+{#                                                        </div>#}
+{#                                                        <div>#}
+{#                                                            <span class="fw-bold font-14">(8)</span>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="text-center mb-3 mt-2">#}
+{#                                                        <input type="submit"#}
+{#                                                               class="btn main-color-green text-white rounded-pill px-5 py-2"#}
+{#                                                               value="اعمال فیلتر">#}
+{#                                                    </div>#}
+{#                                                </form>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+                <div class="col-lg-18">
+                    <div class="content-box">
+                        <div class="container-fluid">
+                            <h3 class="title-font">نتیجه‌ای یافت نشد !</h3>
+                            <p class="my-3">- از عبارت‌های متداول‌تر استفاده کنید.</p>
+                            <p>- املای عبارت وارد شده را بررسی کنید.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- /content -->
+{% endblock %}

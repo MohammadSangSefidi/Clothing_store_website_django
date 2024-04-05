@@ -15,7 +15,7 @@ button.addEventListener('click', function (event) {
         headers: {
             'Content-Type': 'application/json',
             'X-CSRFToken': csrfToken,
-            'Authorization': 'Karim b0bee3d83043a95a22bc0adaf81456b67eb903f6',
+            'Authorization': 'Karim 18757dc30ccc50dc0bd54f5f2150c9c0da4228d6',
         },
         body: JSON.stringify(data)
     })
