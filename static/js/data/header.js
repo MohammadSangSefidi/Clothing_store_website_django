@@ -26,7 +26,7 @@ fetch(endpoint, option)
             let title = JSON.stringify(parent.title)
             let id = JSON.stringify(parent.id)
             let slug = JSON.stringify(parent.slug)
-            menu.innerHTML = menu.innerHTML + `<li id="${id}parent"><a href="http://127.0.0.1:8000/products/categories/${slug.replace(/\"/g, "")}"><i class="bi bi-chevron-left"> </i>${title.replace(/\"/g, "")}</a><ul class="level-two" id="${id}"> </ul> </li>`
+            menu.innerHTML = menu.innerHTML + `<li id="${id}parent"><a href="http://127.0.0.1:8000/products/categories/${slug.replace(/\"/g, "")}/1"><i class="bi bi-chevron-left"> </i>${title.replace(/\"/g, "")}</a><ul class="level-two" id="${id}"> </ul> </li>`
         }
         for (let child of childs){
             let parentStr = JSON.stringify(child.parent.id)
@@ -34,7 +34,7 @@ fetch(endpoint, option)
             let slug = JSON.stringify(child.slug)
             let parent = document.getElementById(parentStr)
             let name = JSON.stringify(child.title)
-            parent.innerHTML = parent.innerHTML + `<li><a href="http://127.0.0.1:8000/products/categories/${parentSlug.replace(/\"/g, "")}/${slug.replace(/\"/g, "")}">${name.replace(/\"/g, "")}</a></li>`
+            parent.innerHTML = parent.innerHTML + `<li><a href="http://127.0.0.1:8000/products/categories/${parentSlug.replace(/\"/g, "")}/${slug.replace(/\"/g, "")}/1">${name.replace(/\"/g, "")}</a></li>`
         }
         for (let parent of parents){
             let parentStr = JSON.stringify(parent.id)
@@ -44,7 +44,7 @@ fetch(endpoint, option)
             if (parentDiv.innerHTML === ' '){
                 let div = document.getElementById(`${parentStr}parent`)
                 div.parentNode.removeChild(div)
-                menu.innerHTML = menu.innerHTML + `<li><a href="http://127.0.0.1:8000/products/categories/${slug.replace(/\"/g, "")}">${title.replace(/\"/g, "")}</a></li>`
+                menu.innerHTML = menu.innerHTML + `<li><a href="http://127.0.0.1:8000/products/categories/${slug.replace(/\"/g, "")}/1">${title.replace(/\"/g, "")}</a></li>`
             }
         }
     })
@@ -55,7 +55,7 @@ let search_input_header = document.getElementById('search-input-header')
 search_button.addEventListener('click', function (event) {
     event.preventDefault();
     console.log(search_input_header)
-    document.location.href = `http://127.0.0.1:8000/products/search/${search_input_header.value}/`
+    document.location.href = `http://127.0.0.1:8000/products/search/${search_input_header.value}/1`
 })
 
 

@@ -17,9 +17,9 @@
                 <ol class="breadcrumb mb-0">
                     <li class="breadcrumb-item"><a href="{% url 'home-url' %}" class="font-14 text-muted-two">خانه</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="{% url 'products-category' parent_slug %}"
+                    <li class="breadcrumb-item"><a href="{% url 'products-category' parent_slug 1 %}"
                                                    class="font-14 text-muted-two">{{ parent }}</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'products-category-child' parent_slug category_slug %}"
+                    <li class="breadcrumb-item"><a href="{% url 'products-category-child' parent_slug category_slug 1 %}"
                                                    class="font-14 text-muted-two">{{ category }}</a></li>
                     <li class="breadcrumb-item active main-color-one-color font-14 fw-bold"
                         aria-current="page">{{ title }}</li>

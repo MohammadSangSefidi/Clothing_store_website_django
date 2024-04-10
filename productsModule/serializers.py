@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from productsModule.models import *
+from .models import *
 from jalali_date import datetime2jalali, date2jalali
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -41,6 +41,9 @@ class ProductsSerializer(serializers.ModelSerializer):
             'title',
             'price',
             'discount',
+            'amazing',
+            'amazing_date_str',
+            'amazing_time_str',
             'count',
             'category',
             'color',
@@ -125,6 +128,7 @@ class ProductsSerializer(serializers.ModelSerializer):
             }
             images.append(imageDict)
         return images
+
 
 
 class CommentsSerializer(serializers.ModelSerializer):

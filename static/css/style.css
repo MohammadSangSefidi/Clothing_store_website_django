@@ -4265,3 +4265,6 @@ div.countdown-bar div:nth-of-type(2) span {
 .margin-div{
     margin-bottom: 15px;
 }
+.hover_pagination:hover{
+    cursor: pointer;
+}

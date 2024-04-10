@@ -81,7 +81,7 @@ fetch(productsEndpoint, productsOption)
                                         ندارد
                                     </label>`
         }
-        price_div.innerHTML = `${data.price - (data.price * data.discount / 100)} تومان`
+        price_div.innerHTML = `${data.price - (data.price * (data.discount + data.amazing) / 100)} تومان`
         info_div.innerHTML = data.shortDes
         comment_count.innerHTML = data.commentsCount
         score_average.innerHTML = data.score

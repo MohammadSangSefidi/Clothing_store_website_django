@@ -385,7 +385,7 @@
                                             <div class="accordion-body">
                                                 {#                                                <form action="">#}
                                                     {% for child in children %}
-                                                        <a href="{% url 'products-category-child' child.parent.slug child.slug %}"
+                                                        <a href="{% url 'products-category-child' child.parent.slug child.slug 1%}"
                                                            class="d-flex align-items-center justify-content-between flex-wrap mb-3">
                                                             <div class="form-check">
                                                                 <p class="form-check-label">{{ child.title }}</p>
@@ -979,28 +979,11 @@
                             <div class="col-12">
                                 <div class="my-paginate mt-5">
                                     <nav aria-label="Page navigation example">
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item disabled">
-                                                <a class="page-link rounded-3" href="#"><i
-                                                        class="bi bi-chevron-right"></i></a>
-                                            </li>
-                                            <li class="page-item active"><a class="page-link rounded-3"
-                                                                            href="#">1</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link rounded-3" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link rounded-3" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link rounded-3" href="#">...</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link rounded-3" href="#">14</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link rounded-3" href="#">15</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link rounded-3" href="#">16</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a class="page-link rounded-3" href="#"><i
-                                                        class="bi bi-chevron-left"></i></a>
-                                            </li>
+                                        <input type="hidden" id="num-input" value="{{ num }}">
+                                        <input type="hidden" id="slug-input" value="{{ slug }}">
+                                        <input type="hidden" id="child-input" value="{{ child }}">
+                                        <ul class="pagination justify-content-center" id="pagination-div">
+
                                         </ul>
                                     </nav>
                                 </div>
@@ -1069,6 +1052,6 @@
 {% endblock %}
 
 {% block footer-references %}
-     <script src="/static/js/data/productsModule/add-product-function.js"></script>
+     <script src="/static/js/data/productsModule/products_functions.js"></script>
     <script src="/static/js/data/productsModule/products-category-child.js"></script>
 {% endblock %}

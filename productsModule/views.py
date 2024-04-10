@@ -3,6 +3,7 @@ from django.views import View
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 
 from homeModule.authentication import TokenAuthenticationCustom
 from .models import *
@@ -13,13 +14,14 @@ from .serializers import CategorySerializer, ProductsSerializer, CommentsSeriali
 
 
 class CategoriesView(View):
-    def get(self, request):
+    def get(self, request, num):
         queryset = CategoryModel.objects.filter(parent=None, isActive=True, isDelete=False)
         return render(request, 'category-page.html', {
-            'categories': queryset
+            'categories': queryset,
+            'num': num
         })
 
-    def post(self, request):
+    def post(self, request, num):
         pass
 
 
@@ -36,12 +38,39 @@ class CategoriesAPIView(APIView):
         return Response({'message': 'post is not allowed'})
 
 
-class ProductsAPIView(APIView):
+class ProductsAPIView(APIView, PageNumberPagination):
     authentication_classes = [TokenAuthenticationCustom]
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         queryset = ProductsModel.objects.filter(isActive=True, isDelete=False)
+        paginated_products = self.paginate_queryset(queryset, request, view=self)
+        data = ProductsSerializer(paginated_products, many=True).data
+        return self.get_paginated_response(data)
+
+    def post(self, request):
+        return Response({'message': 'post is not allowed'})
+
+
+class BestSellingProductsAPIView(APIView):
+    authentication_classes = [TokenAuthenticationCustom]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        queryset = ProductsModel.objects.filter(isActive=True, isDelete=False).order_by('sell_count')[:12]
+        data = ProductsSerializer(queryset, many=True).data
+        return Response(data)
+
+    def post(self, request):
+        return Response({'message': 'post is not allowed'})
+
+
+class NewestProductsAPIView(APIView):
+    authentication_classes = [TokenAuthenticationCustom]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        queryset = ProductsModel.objects.filter(isActive=True, isDelete=False).order_by('id')[:12]
         data = ProductsSerializer(queryset, many=True).data
         return Response(data)
 
@@ -50,8 +79,8 @@ class ProductsAPIView(APIView):
 
 
 class ProductsCategoryView(View):
-    def get(self, request, category):
-        category = CategoryModel.objects.filter(slug=category, parent=None).first()
+    def get(self, request, slug, num):
+        category = CategoryModel.objects.filter(slug=slug, parent=None).first()
         if category is not None:
             children = category.categorymodel_set.all(),
             return render(request, 'products-category-page.html', {
@@ -59,37 +88,40 @@ class ProductsCategoryView(View):
                 'count': category.count(),
                 'children': children[0],
                 'len': len(children[0]),
-                'categories': CategoryModel.objects.filter(isActive=True, isDelete=False, parent=None).all()
+                'categories': CategoryModel.objects.filter(isActive=True, isDelete=False, parent=None).all(),
+                'num': num,
+                'slug': slug
             })
         else:
             return redirect('404')
 
-    def post(self, request, category):
+    def post(self, request, category, num):
         pass
 
 
-class ProductsCategoryAPIView(APIView):
+class ProductsCategoryAPIView(APIView, PageNumberPagination):
     authentication_classes = [TokenAuthenticationCustom]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, category):
-        category = CategoryModel.objects.filter(slug=category).first()
+    def get(self, request, slug, num):
+        category = CategoryModel.objects.filter(slug=slug).first()
         if category is not None and category.parent is None:
             queryset = ProductsModel.objects.filter(category__parent=category, isActive=True, isDelete=False)
             if len(queryset) == 0:
                 queryset = ProductsModel.objects.filter(category=category, isActive=True, isDelete=False)
-            data = ProductsSerializer(queryset, many=True).data
-            return Response(data)
+            paginated_products = self.paginate_queryset(queryset, request, view=self)
+            data = ProductsSerializer(paginated_products, many=True).data
+            return self.get_paginated_response(data)
         else:
             return Response({'message': 'دسته بندی پیدا نشد'})
 
-    def post(self, request, category):
+    def post(self, request, slug, num):
         return Response({'message': 'post is not allowed'})
 
 
 class ProductsCategoryChildView(View):
-    def get(self, request, category, child):
-        category = CategoryModel.objects.filter(slug=child, parent__slug=category).first()
+    def get(self, request, slug, child, num):
+        category = CategoryModel.objects.filter(slug=child, parent__slug=slug).first()
         if category is not None:
             children = category.parent.categorymodel_set.all(),
             return render(request, 'products-category-child-page.html', {
@@ -97,29 +129,33 @@ class ProductsCategoryChildView(View):
                 'count': category.count(),
                 'parent': category.parent.title,
                 'children': children[0],
+                'slug': slug,
+                'child': child,
+                'num': num
             })
         else:
             return redirect('404')
 
-    def post(self, request, category):
+    def post(self, request, slug, child, num):
         pass
 
 
-class ProductsCategoryChildAPIView(APIView):
+class ProductsCategoryChildAPIView(APIView, PageNumberPagination):
     authentication_classes = [TokenAuthenticationCustom]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, category, child):
-        category = CategoryModel.objects.filter(slug=child, parent__slug=category).first()
+    def get(self, request, slug, child, num):
+        category = CategoryModel.objects.filter(slug=child, parent__slug=slug).first()
         if category is not None:
             queryset = ProductsModel.objects.filter(category=category, category__parent=category.parent, isActive=True,
                                                     isDelete=False)
-            data = ProductsSerializer(queryset, many=True).data
-            return Response(data)
+            paginated_products = self.paginate_queryset(queryset, request, view=self)
+            data = ProductsSerializer(paginated_products, many=True).data
+            return self.get_paginated_response(data)
         else:
             return Response({'message': 'دسته بندی پیدا نشد'})
 
-    def post(self, request, category, child):
+    def post(self, request, slug, child, num):
         return Response({'message': 'post is not allowed'})
 
 
@@ -215,29 +251,32 @@ class ProductDetailSendCommentsAPIView(APIView):
 
 
 class ProductSearchView(View):
-    def get(self, request, value):
+    def get(self, request, value, num):
         product = ProductsModel.objects.filter(title__contains=value, isActive=True, isDelete=False).first()
         if product is not None:
             queryset = CategoryModel.objects.filter(parent=None, isActive=True, isDelete=False)
+
             return render(request, 'product-search-page.html',{
                 'value': value,
-                'categories': queryset
+                'categories': queryset,
+                'num': num
             })
         else:
             return render(request, 'product-search-not-found-page.html')
 
-    def post(self, request, value):
+    def post(self, request, value, num):
         pass
 
 
-class ProductSearchAPIView(APIView):
+class ProductSearchAPIView(APIView, PageNumberPagination):
     authentication_classes = [TokenAuthenticationCustom]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, value):
+    def get(self, request, value, num):
         product = ProductsModel.objects.filter(title__contains=value, isActive=True, isDelete=False)
-        date = ProductsSerializer(product, many=True).data
-        return Response(date)
+        paginated_products = self.paginate_queryset(product, request, view=self)
+        date = ProductsSerializer(paginated_products, many=True).data
+        return self.get_paginated_response(date)
 
-    def post(self, request, value):
+    def post(self, request, value, num):
         return Response({'message': 'post is not allowed'})

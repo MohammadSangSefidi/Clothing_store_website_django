@@ -8,13 +8,6 @@ let commentsOption = {
     }
 }
 
-function range(start, end) {
-  const result = [];
-  for (let i = start; i <= end; i++) {
-    result.push(i);
-  }
-  return result;
-}
 
 fetch(commentsEndpoint, commentsOption)
     .then(response => response.json())

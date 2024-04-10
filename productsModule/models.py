@@ -1,5 +1,7 @@
-from django.db import models
+import datetime
 
+from django.db import models
+from django.utils import timezone
 
 class CategoryModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
@@ -72,6 +74,9 @@ class ProductsModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
     price = models.IntegerField(verbose_name='قیمت')
     discount = models.IntegerField(null=True, verbose_name='درصد تخفیف')
+    amazing_time = models.DateTimeField(null=True, verbose_name='تاریخ اتمام شگفت انگیز')
+    is_amazing = models.BooleanField(default=False, verbose_name='شگفت انگیز هست/نیست')
+    amazing_discount = models.IntegerField(default=0, verbose_name='درصد تخفیف شگفت انگیز')
     count = models.IntegerField(verbose_name='تعداد در انبار')
     category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, verbose_name='دسته بندی')
     color = models.ManyToManyField(ColorModel, verbose_name='رنگ ها', blank=True)
@@ -84,6 +89,27 @@ class ProductsModel(models.Model):
     slug = models.SlugField(unique=True, allow_unicode=True, verbose_name='عنوان در Url')
     isActive = models.BooleanField(verbose_name='فعال/غیر فعال')
     isDelete = models.BooleanField(verbose_name='حذف شود/حذف نشود')
+
+    def amazing(self):
+        if self.is_amazing:
+            if self.amazing_time > timezone.now():
+                return self.amazing_discount
+            else:
+                return 0
+        else:
+            return 0
+
+    def amazing_date_str(self):
+        if self.amazing_time:
+            return datetime.datetime.strftime(self.amazing_time, '%Y-%m-%d')
+        else:
+            return None
+
+    def amazing_time_str(self):
+        if self.amazing_time:
+            return datetime.datetime.strftime(self.amazing_time, '%H:%M')
+        else:
+            return None
 
     def score(self):
         count = 0

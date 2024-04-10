@@ -61,7 +61,6 @@
 		setInterval(function(){
 			el.showclock();	
 		},1000);
-		
 	}
 
 }(jQuery));
@@ -69,8 +68,7 @@
 jQuery(document).ready(function(){
 	if(jQuery(".countdown").length>0){
 		jQuery(".countdown").each(function(){
-			jQuery(this).countdown();	
+			jQuery(this).countdown();
 		})
-		
 	}
 })
