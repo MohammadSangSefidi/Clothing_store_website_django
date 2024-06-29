@@ -54,7 +54,7 @@ class AmazingProductsAPIView(APIView):
 
 class NotFoundView(View):
     def get(self, request):
-        return render(request, '404-page.html')
+        return render(request, '404.html')
 
     def post(self, request):
         pass

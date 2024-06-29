@@ -1,5 +1,8 @@
+from django.core.signals import request_started
+from django.http import HttpRequest
 from django.shortcuts import render, redirect
 from django.views import View
+from django.contrib.auth import logout
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -8,7 +11,7 @@ from rest_framework.pagination import PageNumberPagination
 from homeModule.authentication import TokenAuthenticationCustom
 from .models import *
 from .serializers import CategorySerializer, ProductsSerializer, CommentsSerializer
-
+from usersModule.models import UsersModel
 
 # Create your views here.
 
@@ -103,7 +106,7 @@ class ProductsCategoryAPIView(APIView, PageNumberPagination):
     authentication_classes = [TokenAuthenticationCustom]
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, slug, num):
+    def get(self, request:HttpRequest, slug, num):
         category = CategoryModel.objects.filter(slug=slug).first()
         if category is not None and category.parent is None:
             queryset = ProductsModel.objects.filter(category__parent=category, isActive=True, isDelete=False)
@@ -160,17 +163,41 @@ class ProductsCategoryChildAPIView(APIView, PageNumberPagination):
 
 
 class ProductDetailView(View):
-    def get(self, request, slug):
+    def get(self, request:HttpRequest, slug):
         product = ProductsModel.objects.filter(slug=slug).first()
         if product is not None:
-            return render(request, 'product-detail-page.html', {
-                'title': product.title,
-                'parent': product.category.parent.title,
-                'slug': product.slug,
-                'parent_slug': product.category.parent.slug,
-                'category': product.category.title,
-                'category_slug': product.category.slug
-            })
+            if request.user.is_authenticated:
+                user = UsersModel.objects.filter(id=request.user.id).first()
+                if product in user.favorites.all():
+                    return render(request, 'product-detail-page.html', {
+                        'title': product.title,
+                        'parent': product.category.parent.title,
+                        'slug': product.slug,
+                        'parent_slug': product.category.parent.slug,
+                        'category': product.category.title,
+                        'category_slug': product.category.slug,
+                        'productIsFavorite': True
+                    })
+                else:
+                    return render(request, 'product-detail-page.html', {
+                        'title': product.title,
+                        'parent': product.category.parent.title,
+                        'slug': product.slug,
+                        'parent_slug': product.category.parent.slug,
+                        'category': product.category.title,
+                        'category_slug': product.category.slug,
+                        'productIsFavorite': False
+                    })
+            else:
+                return render(request, 'product-detail-page.html', {
+                    'title': product.title,
+                    'parent': product.category.parent.title,
+                    'slug': product.slug,
+                    'parent_slug': product.category.parent.slug,
+                    'category': product.category.title,
+                    'category_slug': product.category.slug,
+                    'productIsFavorite': False
+                })
         else:
             return redirect('404')
 
@@ -239,7 +266,7 @@ class ProductDetailSendCommentsAPIView(APIView):
                 product = ProductsModel.objects.filter(slug=slug).first()
                 if product is not None:
                     newComment = CommentsModel(product=product, name=name, email=email, commentText=commentText,
-                                               score=int(score), isActive=False, isDelete=False)
+                                               score=int(score), isActive=True, isDelete=False)
                     newComment.save()
                     return Response({'message': 'accept'})
                 else:
@@ -280,3 +307,52 @@ class ProductSearchAPIView(APIView, PageNumberPagination):
 
     def post(self, request, value, num):
         return Response({'message': 'post is not allowed'})
+
+
+class CheckProductFavoriteAPIView(APIView):
+    authentication_classes = [TokenAuthenticationCustom]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request:HttpRequest, slug, userId):
+        if userId != 'None':
+            user = UsersModel.objects.filter(id=int(userId)).first()
+            product = ProductsModel.objects.filter(slug=slug).first()
+            if product is not None:
+                if product in user.favorites.all():
+                    return Response({'message': 'accept'})
+                else:
+                    return Response({'message': 'not favorite'})
+            else:
+                return Response({'message': 'slug is not valid'})
+        else:
+            return Response({'message': 'login is required'})
+
+    def post(self, request:HttpRequest, slug, userId):
+        return Response({'message': 'post is not allowed'})
+
+
+class AddProductFavoriteAPIView(APIView):
+    authentication_classes = [TokenAuthenticationCustom]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, slug, userId):
+        return Response({'message': 'get is not allowed'})
+
+    def post(self, request:HttpRequest, slug, userId):
+        if userId != 'None':
+            user = UsersModel.objects.filter(id=int(userId)).first()
+            product = ProductsModel.objects.filter(slug=slug).first()
+            if product is not None:
+                if product not in user.favorites.all():
+                    user.favorites.add(product)
+                    user.save()
+                    return Response({'message': 'accept add'})
+                else:
+                    user.favorites.remove(product)
+                    user.save()
+                    return Response({'message': 'accept remove'})
+            else:
+                return Response({'message': 'slug is not valid'})
+        else:
+            return Response({'message': 'login is required'})
+

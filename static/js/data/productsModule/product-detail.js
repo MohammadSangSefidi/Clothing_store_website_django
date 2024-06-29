@@ -12,6 +12,10 @@ let score_average = document.getElementById('score-average')
 let image_slider = document.getElementById('image-slider')
 let big_image_slider = document.getElementById('big-image-slider')
 
+let favotiteButton = document.getElementById('favorite-button')
+
+let userId = document.getElementById('is-login').value
+
 let productsEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/gotProduct/`
 let productsOption = {
     method: "GET",
@@ -100,3 +104,7 @@ fetch(productsEndpoint, productsOption)
 
     })
 
+
+favotiteButton.addEventListener('click', function (event) {
+    add_favorite(slug, 'favorite-button', userId)
+})

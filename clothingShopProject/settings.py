@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'jalali_date',
     'homeModule',
     'productsModule',
-    'usersModule'
+    'usersModule',
+    'usersPanelModule'
 ]
 
 REST_FRAMEWORK = {
@@ -160,6 +161,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'uploads'
 
+LOGIN_URL = '/user/login/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

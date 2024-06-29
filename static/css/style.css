@@ -4250,6 +4250,7 @@ div.countdown-bar div:nth-of-type(2) span {
 
 /* end style panel */
 
+/* custom style */
 .margin{
     margin-right: 10px;
 }
@@ -4267,4 +4268,28 @@ div.countdown-bar div:nth-of-type(2) span {
 }
 .hover_pagination:hover{
     cursor: pointer;
+}
+.panel-active{
+    color: var(--main-color-two);!important;
+}
+.dis-block{
+    display: block;
+}
+.dis-none{
+    display: none;
+}
+.margin-top{
+    margin-top: 50px;!important;
+}
+.color-red{
+    color: #de0b0b;
+}
+.delete-button{
+    background-color: #FF001122;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 15px;
+    padding: 0
 }

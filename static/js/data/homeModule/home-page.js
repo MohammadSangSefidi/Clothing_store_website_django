@@ -7,6 +7,9 @@ let categoryoption = {
         'Authorization': 'Karim 18757dc30ccc50dc0bd54f5f2150c9c0da4228d6'
     }
 }
+
+let userId = document.getElementById('is-login').value
+
 fetch(categoryEndpoint, categoryoption)
     .then(response => response.json())
     .then(data => {

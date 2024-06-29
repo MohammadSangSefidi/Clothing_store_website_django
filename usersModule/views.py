@@ -127,11 +127,11 @@ class LoginAPIView(APIView):
                         login(request, user)
                         return Response({'message': 'accept'})
                     else:
-                        return Response({'message': 'نام کاربری یا رمز عبور اشتباه است'})
+                        return Response({'message': 'ایمیل یا رمز عبور اشتباه است'})
                 else:
-                    return Response({'message': 'نام کاربری یا رمز عبور اشتباه است'})
+                    return Response({'message': 'ایمیل یا رمز عبور اشتباه است'})
             else:
-                return Response({'message': 'نام کاربری یا رمز عبور اشتباه است'})
+                return Response({'message': 'ایمیل یا رمز عبور اشتباه است'})
         else:
             return Response({'message': 'لطفا اطلاعات خود را به درستی وارد کند'})
 

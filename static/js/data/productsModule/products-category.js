@@ -3,6 +3,8 @@ let num_input = document.getElementById('num-input')
 let category_slug_input = document.getElementById('category-slug-input')
 let pagination_div = document.getElementById('pagination-div')
 
+let userId = document.getElementById('is-login').value
+
 let productsEndpoint = document.location.href + `/gotProducts/?page=${num_input.value}`
 let productsOption = {
     method: "GET",
@@ -19,5 +21,5 @@ fetch(productsEndpoint, productsOption)
             document.location.href= 'http://127.0.0.1:8000/404_page/'
         }
         add_pagination(data, pagination_div, num_input, `http://127.0.0.1:8000/products/categories/${category_slug_input.value}/`, 5)
-        add_products(data.results, productsList)
+        add_products(data.results, productsList, userId)
     })

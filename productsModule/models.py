@@ -3,6 +3,7 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
+
 class CategoryModel(models.Model):
     title = models.CharField(max_length=100, verbose_name='عنوان')
     parent = models.ForeignKey('CategoryModel', on_delete=models.CASCADE, null=True, blank=True,

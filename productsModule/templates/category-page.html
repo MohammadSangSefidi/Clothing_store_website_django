@@ -6,6 +6,11 @@
 
 {% block content %}
     <!-- start slider category -->
+    {% if request.user.is_authenticated %}
+        <input type="hidden" id="is-login" value="{{ request.user.id }}">
+    {% else %}
+        <input type="hidden" id="is-login" value="None">
+    {% endif %}
 
     <div class="slider-category free-swiper py-30">
         <div class="container-fluid position-relative">
@@ -1178,6 +1183,7 @@
 {% endblock %}
 
 {% block footer-references %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/static/js/data/productsModule/products_functions.js"></script>
     <script src="/static/js/data/productsModule/categories.js"></script>
 

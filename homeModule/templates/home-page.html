@@ -1,7 +1,8 @@
 {% extends 'base/_layout.html' %}
 
 {% block header-referense %}
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/data/productsModule/products_functions.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -10,7 +11,11 @@
 
 {% block content %}
     <!-- slider -->
-
+    {% if request.user.is_authenticated %}
+        <input type="hidden" id="is-login" value="{{ request.user.id }}">
+    {% else %}
+        <input type="hidden" id="is-login" value="None">
+    {% endif %}
     <div class="main-slider py-20">
         <div class="container-fluid">
             <div class="row gy-4">
@@ -53,124 +58,6 @@
                     <div class="swiper suggetMoment">
                         <div class="swiper-wrapper position-relative" id="amazing_slider">
                             <script src="/static/js/data/homeModule/home-page-amazing-slider.js"></script>
-                            {#                            <div class="swiper-slide">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <div class="product-timer">#}
-                            {#                                        <div class="timer-label">#}
-                            {#                                            <span>40%</span>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="timer">#}
-                            {#                                            <div class='countdown' data-date="2025-04-9" data-time="16:46">#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-image">#}
-                            {#                                        <img alt="" class="img-fluid" loading="lazy"#}
-                            {#                                             src="/static/img/product/product-1.webp">#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-title">#}
-                            {#                                        <div class="title">#}
-                            {#                                            <p class=" title-font">دفتر سیمی 85 برگ همیشه طرح انار کد 6338</p>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-rating">#}
-                            {#                                            <div class="number"><span class="text-muted font-12">(15+) 4.8</span></div>#}
-                            {#                                            <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-action">#}
-                            {#                                        <div class="link">#}
-                            {#                                            <a class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                <i class="bi bi-basket text-white"></i>#}
-                            {#                                            </a>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="price">#}
-                            {#                                            <p class="old-price">6,500,000 </p>#}
-                            {#                                            <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-
-
-                            {#                            <div class="swiper-slide">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <div class="product-timer">#}
-                            {#                                        <div class="timer-label">#}
-                            {#                                            <span>40%</span>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="timer">#}
-                            {#                                            <div class='countdown' data-date="2027-01-01" data-time="18:30">#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-image">#}
-                            {#                                        <img alt="" class="img-fluid" loading="lazy"#}
-                            {#                                             src="/static/img/product/product-2.webp">#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-title">#}
-                            {#                                        <div class="title">#}
-                            {#                                            <p class=" title-font">دفتر سیمی 85 برگ همیشه طرح انار کد 6338</p>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-rating">#}
-                            {#                                            <div class="number"><span class="text-muted font-12">(15+) 4.8</span></div>#}
-                            {#                                            <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-action">#}
-                            {#                                        <div class="link">#}
-                            {#                                            <a class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                <i class="bi bi-basket text-white"></i>#}
-                            {#                                            </a>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="price">#}
-                            {#                                            <p class="old-price">6,500,000 </p>#}
-                            {#                                            <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="swiper-slide">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <div class="product-timer">#}
-                            {#                                        <div class="timer-label">#}
-                            {#                                            <span>40%</span>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="timer">#}
-                            {#                                            <div class='countdown' data-date="2027-01-01" data-time="18:30">#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-image">#}
-                            {#                                        <img alt="" class="img-fluid" loading="lazy"#}
-                            {#                                             src="/static/img/product/product-3.webp">#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-title">#}
-                            {#                                        <div class="title">#}
-                            {#                                            <p class=" title-font">دفتر سیمی 85 برگ همیشه طرح انار کد 6338</p>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-rating">#}
-                            {#                                            <div class="number"><span class="text-muted font-12">(15+) 4.8</span></div>#}
-                            {#                                            <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                    <div class="product-action">#}
-                            {#                                        <div class="link">#}
-                            {#                                            <a class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                <i class="bi bi-basket text-white"></i>#}
-                            {#                                            </a>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="price">#}
-                            {#                                            <p class="old-price">6,500,000 </p>#}
-                            {#                                            <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                        </div>#}
-                            {#                        <div class="d-flex justify-content-center">#}
-                            {#                            <div class="swiper-progress-bar">#}
-                            {#                                <span class="slide_progress-bar"></span>#}
-                            {#                            </div>#}
                         </div>
                     </div>
                 </div>
@@ -253,84 +140,7 @@
 
             <div class="swiper cat-slider">
                 <div class="swiper-wrapper" id="category-slider">
-                    {#                    <div class="swiper-slide">#}
-                    {#                        <a href="">#}
-                    {#                            <div class="slider-category-item">#}
-                    {#                                <div class="slider-category-item-title">#}
-                    {#                                    <h6>کنکور نظام جدید</h6>#}
-                    {#                                    <span>326 محصول</span>#}
-                    {#                                </div>#}
-                    {#                                <div class="slider-category-item-image">#}
-                    {#                                    <img src="/static/img/mega-img-1.jpg" alt="">#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                        </a>#}
-                    {#                    </div>#}
-                    {#                    <div class="swiper-slide">#}
-                    {#                        <a href="">#}
-                    {#                            <div class="slider-category-item">#}
-                    {#                                <div class="slider-category-item-title">#}
-                    {#                                    <h6>پایه کنکور</h6>#}
-                    {#                                    <span>326 محصول</span>#}
-                    {#                                </div>#}
-                    {#                                <div class="slider-category-item-image">#}
-                    {#                                    <img src="/static/img/mega-img-2.jpg" alt="">#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                        </a>#}
-                    {#                    </div>#}
-                    {#                    <div class="swiper-slide">#}
-                    {#                        <a href="">#}
-                    {#                            <div class="slider-category-item">#}
-                    {#                                <div class="slider-category-item-title">#}
-                    {#                                    <h6>دوازدهم</h6>#}
-                    {#                                    <span>326 محصول</span>#}
-                    {#                                </div>#}
-                    {#                                <div class="slider-category-item-image">#}
-                    {#                                    <img src="/static/img/mega-img-3.jpg" alt="">#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                        </a>#}
-                    {#                    </div>#}
-                    {#                    <div class="swiper-slide">#}
-                    {#                        <a href="">#}
-                    {#                            <div class="slider-category-item">#}
-                    {#                                <div class="slider-category-item-title">#}
-                    {#                                    <h6>علوم پایه</h6>#}
-                    {#                                    <span>326 محصول</span>#}
-                    {#                                </div>#}
-                    {#                                <div class="slider-category-item-image">#}
-                    {#                                    <img src="/static/img/mega-img-4.jpg" alt="">#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                        </a>#}
-                    {#                    </div>#}
-                    {#                    <div class="swiper-slide">#}
-                    {#                        <a href="">#}
-                    {#                            <div class="slider-category-item">#}
-                    {#                                <div class="slider-category-item-title">#}
-                    {#                                    <h6>داستان</h6>#}
-                    {#                                    <span>326 محصول</span>#}
-                    {#                                </div>#}
-                    {#                                <div class="slider-category-item-image">#}
-                    {#                                    <img src="/static/img/mega-img-5.jpg" alt="">#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                        </a>#}
-                    {#                    </div>#}
-                    {#                    <div class="swiper-slide">#}
-                    {#                        <a href="">#}
-                    {#                            <div class="slider-category-item">#}
-                    {#                                <div class="slider-category-item-title">#}
-                    {#                                    <h6>گاجکو</h6>#}
-                    {#                                    <span>326 محصول</span>#}
-                    {#                                </div>#}
-                    {#                                <div class="slider-category-item-image">#}
-                    {#                                    <img src="/static/img/mega-img-6.jpg" alt="">#}
-                    {#                                </div>#}
-                    {#                            </div>#}
-                    {#                        </a>#}
-                    {#                    </div>#}
+
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -372,7 +182,7 @@
                                                 .then(response => response.json())
                                                 .then(data => {
                                                     let big_amazing_slider = document.getElementById('amazing_slider_big')
-                                                    add_products_slider(data, big_amazing_slider, true)
+                                                    add_products_slider(data, big_amazing_slider, true, {{ request.user.id }})
                                                 })
                                         </script>
                                     </div>
@@ -428,55 +238,6 @@
     <!-- end product slider -->
 
 
-    <!-- start advert -->
-
-    {#    <div class="advert advert-box">#}
-    {#        <div class="container-fluid">#}
-    {#            <div class="row g-3">#}
-    {##}
-    {#                <div class="col-lg-8">#}
-    {#                    <div class="row g-3">#}
-    {##}
-    {#                        <div class="col-lg-4">#}
-    {#                            <div class="advert-item advert-box-item">#}
-    {#                                <a href=""><img src="/static/img/advert-box-1.webp" class="rounded-4" alt=""></a>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {##}
-    {#                        <div class="col-lg-8">#}
-    {#                            <div class="advert-item advert-box-item">#}
-    {#                                <a href=""><img src="/static/img/advert-box-2.webp" class="rounded-4" alt=""></a>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {##}
-    {#                        <div class="col-lg-8">#}
-    {#                            <div class="advert-item advert-box-item">#}
-    {#                                <a href=""><img src="/static/img/advert-box-3.webp" class="rounded-4" alt=""></a>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {##}
-    {#                        <div class="col-lg-4">#}
-    {#                            <div class="advert-item advert-box-item">#}
-    {#                                <a href=""><img src="/static/img/advert-box-4.webp" class="rounded-4" alt=""></a>#}
-    {#                            </div>#}
-    {#                        </div>#}
-    {##}
-    {#                    </div>#}
-    {#                </div>#}
-    {##}
-    {#                <div class="col-lg-4">#}
-    {#                    <div class="advert-item advert-box-item-two">#}
-    {#                        <a href=""><img src="/static/img/advert-box-5.webp" class="rounded-4" alt=""></a>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {##}
-    {##}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-
-    <!-- /advert -->
-
     <!-- start product slider -->
 
     <div class="product-slider free-sw site-slider mt-5">
@@ -513,136 +274,119 @@
 
     <!-- end product slider -->
 
-    <!-- start advert -->
-
-    <div class="advert py-20">
-        <div class="container-fluid">
-            <div class="row gy-4">
-                <div class="col-12">
-                    <div class="advert-item">
-                        <a href=""><img src="/static/img/advert-7.webp" class="rounded-4 w-100" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- /advert -->
-
     <!-- start blog slider -->
 
-    <div class="blog-slider py-30">
-        <div class="container-fluid position-relative">
-
-            <div class="section-title">
-                <div class="row gy-3 align-items-center">
-                    <div class="col-sm-8">
-                        <div class="section-title-title">
-                            <h2 class="title-font h1 main-color-three-color">مطالب <span class="main-color-one-color">وبلاگ</span>
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="section-title-link text-sm-end text-start">
-                            <a class="btn btn-title  rounded-pill" href=""> مشاهده همه</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper blog-slider-sw">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <a href="">
-                            <div class="blog-item">
-                                <div class="blog-item-image">
-                                    <img src="/static/img/blog-1.png" alt="">
-                                </div>
-                                <div class="blog-item-desc">
-                                    <div class="blog-item-title">
-                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>
-                                    </div>
-                                    <div class="blog-item-date">
-                                        <h6 class="f-800">30</h6>
-                                        <span class="d-block">بهمن</span>
-                                        <span>1402</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <div class="blog-item">
-                                <div class="blog-item-image">
-                                    <img src="/static/img/blog-2.png" alt="">
-                                </div>
-                                <div class="blog-item-desc">
-                                    <div class="blog-item-title">
-                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>
-                                    </div>
-                                    <div class="blog-item-date">
-                                        <h6 class="f-800">30</h6>
-                                        <span class="d-block">بهمن</span>
-                                        <span>1402</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <div class="blog-item">
-                                <div class="blog-item-image">
-                                    <img src="/static/img/blog-3.png" alt="">
-                                </div>
-                                <div class="blog-item-desc">
-                                    <div class="blog-item-title">
-                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>
-                                    </div>
-                                    <div class="blog-item-date">
-                                        <h6 class="f-800">30</h6>
-                                        <span class="d-block">بهمن</span>
-                                        <span>1402</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="swiper-slide">
-                        <a href="">
-                            <div class="blog-item">
-                                <div class="blog-item-image">
-                                    <img src="/static/img/blog-5.jpg" alt="">
-                                </div>
-                                <div class="blog-item-desc">
-                                    <div class="blog-item-title">
-                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از
-                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>
-                                    </div>
-                                    <div class="blog-item-date">
-                                        <h6 class="f-800">30</h6>
-                                        <span class="d-block">بهمن</span>
-                                        <span>1402</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+{#    <div class="blog-slider py-30">#}
+{#        <div class="container-fluid position-relative">#}
+{##}
+{#            <div class="section-title">#}
+{#                <div class="row gy-3 align-items-center">#}
+{#                    <div class="col-sm-8">#}
+{#                        <div class="section-title-title">#}
+{#                            <h2 class="title-font h1 main-color-three-color">مطالب <span class="main-color-one-color">وبلاگ</span>#}
+{#                            </h2>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="col-sm-4">#}
+{#                        <div class="section-title-link text-sm-end text-start">#}
+{#                            <a class="btn btn-title  rounded-pill" href=""> مشاهده همه</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="swiper blog-slider-sw">#}
+{#                <div class="swiper-wrapper">#}
+{#                    <div class="swiper-slide">#}
+{#                        <a href="">#}
+{#                            <div class="blog-item">#}
+{#                                <div class="blog-item-image">#}
+{#                                    <img src="/static/img/blog-1.png" alt="">#}
+{#                                </div>#}
+{#                                <div class="blog-item-desc">#}
+{#                                    <div class="blog-item-title">#}
+{#                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از#}
+{#                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>#}
+{#                                    </div>#}
+{#                                    <div class="blog-item-date">#}
+{#                                        <h6 class="f-800">30</h6>#}
+{#                                        <span class="d-block">بهمن</span>#}
+{#                                        <span>1402</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="swiper-slide">#}
+{#                        <a href="">#}
+{#                            <div class="blog-item">#}
+{#                                <div class="blog-item-image">#}
+{#                                    <img src="/static/img/blog-2.png" alt="">#}
+{#                                </div>#}
+{#                                <div class="blog-item-desc">#}
+{#                                    <div class="blog-item-title">#}
+{#                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از#}
+{#                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>#}
+{#                                    </div>#}
+{#                                    <div class="blog-item-date">#}
+{#                                        <h6 class="f-800">30</h6>#}
+{#                                        <span class="d-block">بهمن</span>#}
+{#                                        <span>1402</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="swiper-slide">#}
+{#                        <a href="">#}
+{#                            <div class="blog-item">#}
+{#                                <div class="blog-item-image">#}
+{#                                    <img src="/static/img/blog-3.png" alt="">#}
+{#                                </div>#}
+{#                                <div class="blog-item-desc">#}
+{#                                    <div class="blog-item-title">#}
+{#                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از#}
+{#                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>#}
+{#                                    </div>#}
+{#                                    <div class="blog-item-date">#}
+{#                                        <h6 class="f-800">30</h6>#}
+{#                                        <span class="d-block">بهمن</span>#}
+{#                                        <span>1402</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                    <div class="swiper-slide">#}
+{#                        <a href="">#}
+{#                            <div class="blog-item">#}
+{#                                <div class="blog-item-image">#}
+{#                                    <img src="/static/img/blog-5.jpg" alt="">#}
+{#                                </div>#}
+{#                                <div class="blog-item-desc">#}
+{#                                    <div class="blog-item-title">#}
+{#                                        <h6 class="text-overflow-1">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از#}
+{#                                            صنعت چاپ و با استفاده از طراحان گرافیک است.</h6>#}
+{#                                    </div>#}
+{#                                    <div class="blog-item-date">#}
+{#                                        <h6 class="f-800">30</h6>#}
+{#                                        <span class="d-block">بهمن</span>#}
+{#                                        <span>1402</span>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </a>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#        </div>#}
+{#    </div>#}
 
     <!-- /blog slider -->
 {% endblock %}
 
 {% block footer-references %}
-    <script src="/static/js/data/productsModule/products_functions.js"></script>
     <script src="/static/js/data/homeModule/home-page.js"></script>
     <script src="/static/js/plugin/countdown/countdown.js"></script>
 

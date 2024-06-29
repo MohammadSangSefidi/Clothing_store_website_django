@@ -16,5 +16,7 @@ urlpatterns = [
     path('detail/<slug>/', ProductDetailView.as_view(), name='product-detail'),
     path('detail/<slug>/gotProduct/', ProductDetailAPIView.as_view()),
     path('detail/<slug>/gotComments/', ProductDetailCommentsAPIView.as_view()),
-    path('detail/<slug>/sendComments/', ProductDetailSendCommentsAPIView.as_view())
+    path('detail/<slug>/sendComments/', ProductDetailSendCommentsAPIView.as_view()),
+    path('detail/<slug>/addFavorite/<userId>/', AddProductFavoriteAPIView.as_view()),
+    path('detail/<slug>/checkFavorite/<userId>', CheckProductFavoriteAPIView.as_view()),
 ]

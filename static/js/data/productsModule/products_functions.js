@@ -22,11 +22,43 @@ function add_category_box(categories, list) {
     }
 }
 
+async function checkFavorite(slug, userId) {
+    let checkFavoriteEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/checkFavorite/${userId}`
+    let checkFavoriteOption = {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Karim 18757dc30ccc50dc0bd54f5f2150c9c0da4228d6'
+        }
+    }
 
-function add_products(data, list) {
+    try {
+        const response = await fetch(checkFavoriteEndpoint, checkFavoriteOption);
+        const data = await response.json();
+
+        if (data.message === "accept") {
+            return true;
+        } else {
+            return false;
+        }
+    } catch (error) {
+        return false;
+    }
+}
+
+
+async function add_products(data, list, userId) {
     for (let product of data) {
+        let id = product.id
         let title = JSON.stringify(product.title)
-        let slug = JSON.stringify(product.slug)
+        let slug = JSON.stringify(product.slug).replace(/\"/g, "")
+        let heartIcon = ''
+        const check = await checkFavorite(slug.replace(/\"/g, ""), userId)
+        if (check) {
+            heartIcon = 'bi bi-heart-fill color-red'
+        } else {
+            heartIcon = 'bi bi-heart color-red'
+        }
         let price = JSON.stringify(product.price)
         let discount = product.discount + product.amazing
         let image1 = product.images[0].image
@@ -79,12 +111,8 @@ function add_products(data, list) {
                                                                             data-bs-placement="top"
                                                                             data-bs-title="افزودن به سبد خرید"><i
                                                             class="bi bi-basket"></i></a></li>
-                                                    <li class="nav-item"><a href=""
-                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                                            data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            data-bs-title="افزودن به علاقه ها"><i
-                                                            class="bi bi-heart"></i></a></li>
+                                                    <li class="nav-item" id="f${id}" onclick="add_favorite('${slug}', 'f${id}', '${userId}')">
+                                                        <i class="${heartIcon}"></i></li>
                                                 </ul>
                                             </nav>
                                             <div class="product-rating">
@@ -96,21 +124,24 @@ function add_products(data, list) {
                                     </div>
                                 </div>
                             </div>` + list.innerHTML
+
     }
 }
 
+
 function add_products_slider(data, list, needTimer) {
     for (let product of data) {
+        let id = product.id
         let title = JSON.stringify(product.title)
-        let slug = JSON.stringify(product.slug)
+        let slug = JSON.stringify(product.slug).replace(/\"/g, "")
         let price = JSON.stringify(product.price)
         let discount = product.discount + product.amazing
         let image1 = product.images[0].image
         let image2 = product.images[1].image
 
         let timer_div = ''
-        if (needTimer === true){
-           timer_div = `<div class="product-timer justify-content-center border-top pt-2 mb-0">
+        if (needTimer === true) {
+            timer_div = `<div class="product-timer justify-content-center border-top pt-2 mb-0">
                                                 <div class="timer">
                                                     <div class='countdown' data-date="${product.amazing_date_str}" data-time="${product.amazing_time_str}">
                                                     </div>
@@ -165,12 +196,6 @@ function add_products_slider(data, list, needTimer) {
                                                                             data-bs-placement="top"
                                                                             data-bs-title="افزودن به سبد خرید"><i
                                                             class="bi bi-basket"></i></a></li>
-                                                    <li class="nav-item"><a href=""
-                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"
-                                                                            data-bs-toggle="tooltip"
-                                                                            data-bs-placement="top"
-                                                                            data-bs-title="افزودن به علاقه ها"><i
-                                                            class="bi bi-heart"></i></a></li>
                                                 </ul>
                                             </nav>
                                             <div class="product-rating">
@@ -196,8 +221,7 @@ function add_pagination(data, pagination_div, num_input, url, length) {
     }
 
     let page_count = data.count / length
-    // if (data.count < 9) {
-    console.log(page_count, !Number.isInteger(page_count))
+
     if (!Number.isInteger(page_count)) {
         if (page_count < 1) {
             page_count = 1
@@ -239,4 +263,65 @@ function range(start, end) {
         result.push(i);
     }
     return result;
+}
+
+function add_favorite(slug, buttonId, userId) {
+    let button = document.getElementById(buttonId)
+    if (userId !== 'None') {
+        let addFavoriteEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/addFavorite/${userId}/`
+        let addFavoriteOption = {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Karim 18757dc30ccc50dc0bd54f5f2150c9c0da4228d6'
+            }
+        }
+        fetch(addFavoriteEndpoint, addFavoriteOption)
+            .then(respone => respone.json())
+            .then(data => {
+                if (data.message === 'accept add') {
+                    button.firstElementChild.classList.remove('bi-heart')
+                    button.firstElementChild.classList.add('bi-heart-fill')
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "محصول به لیست علاقه مندی ها اضافه شد",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                if (data.message === 'accept remove') {
+                    button.firstElementChild.classList.add('bi-heart')
+                    button.firstElementChild.classList.remove('bi-heart-fill')
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "محصول از لیست علاقه مندی ها حذف شد",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                if (data.message === 'login is required') {
+                    button.firstElementChild.classList.add('bi-heart')
+                    button.firstElementChild.classList.remove('bi-heart-fill')
+                    Swal.fire({
+                        position: "center",
+                        icon: "info",
+                        title: "اول باید وارد حساب کاربری خود بشید",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+    } else {
+        button.firstElementChild.classList.add('bi-heart')
+        button.firstElementChild.classList.remove('bi-heart-fill')
+        Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "اول باید وارد حساب کاربری خود بشید",
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
 }

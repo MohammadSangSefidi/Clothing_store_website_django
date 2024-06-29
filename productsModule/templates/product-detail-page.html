@@ -10,6 +10,11 @@
 
 {% block content %}
     <!-- start breadcroumb -->
+    {% if request.user.is_authenticated %}
+        <input type="hidden" id="is-login" value="{{ request.user.id }}">
+    {% else %}
+        <input type="hidden" id="is-login" value="None">
+    {% endif %}
 
     <div class="bread-crumb py-4">
         <div class="container-fluid">
@@ -162,13 +167,18 @@
                                     <i class="bi bi-share"></i>
                                 </div>
                                 <div class="icon-product-box-item" data-bs-toggle="tooltip" data-bs-placement="top"
-                                     data-bs-title="افزودن به علاقه مندی">
-                                    <i class="bi bi-heart"></i>
+                                     data-bs-title="افزودن به علاقه مندی" id="favorite-button">
+                                    {% if productIsFavorite %}
+                                        <i class="bi bi-heart-fill color-red"></i>
+                                    {% else %}
+                                        <i class="bi bi-heart color-red"></i>
+                                    {% endif %}
+
                                 </div>
-                                <div class="icon-product-box-item" data-bs-toggle="tooltip" data-bs-placement="top"
-                                     data-bs-title="مقایسه محصول">
-                                    <i class="bi bi-arrow-left-right"></i>
-                                </div>
+{#                                <div class="icon-product-box-item" data-bs-toggle="tooltip" data-bs-placement="top"#}
+{#                                     data-bs-title="مقایسه محصول">#}
+{#                                    <i class="bi bi-arrow-left-right"></i>#}
+{#                                </div>#}
                                 {#                                                                <div class="icon-product-box-item" data-bs-toggle="modal" data-bs-target="#chartModal"#}
                                 {#                                                                     data-bs-placement="top" title="نمودار تغییر قیمت">#}
                                 {#                                                                    <i class="bi bi-bar-chart"></i>#}
@@ -1408,6 +1418,7 @@
 
 {% block footer-references %}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/static/js/data/productsModule/products_functions.js"></script>
     <script src="/static/js/data/productsModule/product-detail-send-comment.js"></script>
     <script src="/static/js/data/productsModule/product-comment.js"></script>
     <script src="/static/js/data/productsModule/product-detail.js"></script>

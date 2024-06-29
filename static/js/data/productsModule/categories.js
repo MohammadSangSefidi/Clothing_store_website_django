@@ -2,6 +2,9 @@ let categorySlider = document.getElementById('category-slider')
 let productsList = document.getElementById('products-list')
 let pagination_div = document.getElementById('pagination-div')
 
+let userId = document.getElementById('is-login').value
+
+
 fetch(endpoint, option)
     .then(response => response.json())
     .then(data => {
@@ -26,7 +29,7 @@ fetch(productsEndpoint, productsOption)
             document.location.href= 'http://127.0.0.1:8000/404_page/'
         }
         add_pagination(data, pagination_div, num_input, 'http://127.0.0.1:8000/products/categories/', 5)
-        add_products(data.results, productsList)
+        add_products(data.results, productsList, userId)
     })
 
 

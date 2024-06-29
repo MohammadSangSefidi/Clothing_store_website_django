@@ -14,7 +14,6 @@ fetch(commentsEndpoint, commentsOption)
     .then(data => {
         let commentDiv
         for (let comment of data) {
-            console.log(comment)
             commentDiv = `<div class="comment mb-4">
                                             <div class="title">
                                                 <div class="row align-items-center">

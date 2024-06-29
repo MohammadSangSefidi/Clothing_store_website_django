@@ -15,25 +15,26 @@ window.addEventListener("load", function () {
             emailActivateCode: document.getElementById('otp-value').value,
             csrfmiddlewaretoken: csrfToken
         };
-        console.log(data)
+
         fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrfToken,
-                'Authorization': 'Karim b0bee3d83043a95a22bc0adaf81456b67eb903f6',
+                'Authorization': 'Karim 18757dc30ccc50dc0bd54f5f2150c9c0da4228d6',
             },
             body: JSON.stringify(data)
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data)
                 let errorBox = document.getElementById('confirm-email-error')
                 let message = JSON.stringify(data['message'])
                 if (message === '"accept"') {
                     errorBox.innerHTML = ''
                     window.location.href = 'http://127.0.0.1:8000/user/login/'
                 } else {
-                    errorBox.innerHTML = message.replace(/\"/g, "")
+                    errorBox.innerHTML = message
                 }
             })
             .catch(error => {
@@ -46,7 +47,6 @@ window.addEventListener("load", function () {
     firstInput.focus();
 
     // OTP Logic
-
     const updateValue = (inputs) => {
         OTPValueContainer.value = Array.from(inputs).reduce((acc, curInput) => acc.concat(curInput.value ? curInput.value : "*"), "");
     };

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from productsModule.models import ProductsModel
 
 # Create your models here.
 
@@ -10,6 +10,7 @@ class UsersModel(AbstractUser):
     avatar = models.ImageField(upload_to='images/users_avatars/', verbose_name='عکس پروفایل', null=True)
     emailActivateCode = models.CharField(max_length=6, verbose_name='کد فعالسازی')
     token = models.CharField(max_length=80, verbose_name='توکن', null=True)
+    favorites = models.ManyToManyField(ProductsModel, verbose_name='محصولات مورد علاقه')
 
     first_name = None
     last_name = None
