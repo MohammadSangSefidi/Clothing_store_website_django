@@ -1,5 +1,5 @@
 let amazing_slider = document.getElementById('amazing_slider')
-let amazing_sliderEndpoint = 'http://127.0.0.1:8000/home-page/gotAmazingProducts/'
+let amazing_sliderEndpoint = baseURL + '/home-page/gotAmazingProducts/'
 let amazing_sliderOption = {
     method: "GET",
     headers: {

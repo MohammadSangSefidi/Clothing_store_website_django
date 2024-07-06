@@ -93,6 +93,7 @@ class ProductsModel(models.Model):
 
     def amazing(self):
         if self.is_amazing:
+            self.productsimagesmodel_set.first()
             if self.amazing_time > timezone.now():
                 return self.amazing_discount
             else:

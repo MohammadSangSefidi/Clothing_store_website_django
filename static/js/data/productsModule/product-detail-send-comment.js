@@ -18,7 +18,7 @@ commentButton.addEventListener('click', (event) => {
     }
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const url = `http://127.0.0.1:8000/products/detail/${slug}/sendComments/`;
+    const url = baseURL + `/products/detail/${slug}/sendComments/`;
     const data = {
         name: name_input.value,
         email: email_input.value,

@@ -3,7 +3,7 @@ button.addEventListener('click', function (event) {
     event.preventDefault();
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const url = 'http://127.0.0.1:8000/user/register/checkInfo/';
+    const url = baseURL + '/user/register/checkInfo/';
     const data = {
         name: document.getElementById('floatingInputUsername').value,
         email: document.getElementById('floatingInputEmail').value,
@@ -28,7 +28,7 @@ button.addEventListener('click', function (event) {
             if (message === '"accept"') {
                 errorBox.innerHTML = ''
                 let token = JSON.stringify(data['token'])
-                window.location.href = `http://127.0.0.1:8000/user/register/confirm-email/${token.replace(/\"/g, "")}`
+                window.location.href = `${baseURL}/user/register/confirm-email/${token.replace(/\"/g, "")}`
             } else {
                 errorBox.innerHTML = message.replace(/\"/g, "")
             }

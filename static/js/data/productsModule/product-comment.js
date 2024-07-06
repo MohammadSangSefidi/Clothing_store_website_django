@@ -1,5 +1,5 @@
 let comment_list = document.getElementById('comment-list')
-let commentsEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/gotComments/`
+let commentsEndpoint = baseURL + `/products/detail/${slug}/gotComments/`
 let commentsOption = {
     method: "GET",
     headers: {
@@ -13,8 +13,9 @@ fetch(commentsEndpoint, commentsOption)
     .then(response => response.json())
     .then(data => {
         let commentDiv
-        for (let comment of data) {
-            commentDiv = `<div class="comment mb-4">
+        if (data.length > 0) {
+            for (let comment of data) {
+                commentDiv = `<div class="comment mb-4">
                                             <div class="title">
                                                 <div class="row align-items-center">
                                                     <div class="col-sm-10">
@@ -46,15 +47,16 @@ fetch(commentsEndpoint, commentsOption)
                                                 </div>
                                             </div>
                                         </div>`
-            comment_list.innerHTML = comment_list.innerHTML + commentDiv
+                comment_list.innerHTML = comment_list.innerHTML + commentDiv
 
-            let starsDiv = document.getElementById(`${JSON.stringify(comment.id).replace(/\"/g, "")}-star-box`)
-            let scorelist = comment.score.scoreList
-            for (let score of scorelist){
-                starsDiv.innerHTML = starsDiv.innerHTML + '<i class="bi bi-star-fill"></i>'
-            }
-            for (let num of range(1, 5 - comment.score.score)){
-                starsDiv.innerHTML = '<i class="bi bi-star"></i>' + starsDiv.innerHTML
+                let starsDiv = document.getElementById(`${JSON.stringify(comment.id).replace(/\"/g, "")}-star-box`)
+                let scorelist = comment.score.scoreList
+                for (let score of scorelist) {
+                    starsDiv.innerHTML = starsDiv.innerHTML + '<i class="bi bi-star-fill"></i>'
+                }
+                for (let num of range(1, 5 - comment.score.score)) {
+                    starsDiv.innerHTML = '<i class="bi bi-star"></i>' + starsDiv.innerHTML
+                }
             }
         }
     })

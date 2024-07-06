@@ -30,7 +30,7 @@
                         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRight"
                              aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel1">فیلتر ها</h5>
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel1"></h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
                                         aria-label="Close"></button>
                             </div>
@@ -47,36 +47,13 @@
                                     <div class="category-bread mt-2">
                                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                             <ol class="breadcrumb">
-                                                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                                                <li class="breadcrumb-item"><a href="{% url 'home-url' %}">خانه</a></li>
                                                 <li class="breadcrumb-item active" aria-current="page">{{ title }}
                                                 </li>
                                             </ol>
                                         </nav>
                                     </div>
                                     <div class="item-boxs">
-                                        {#                                        <div class="item-box shadow-box">#}
-                                        {#                                            <div class="title">#}
-                                        {#                                                <div class="d-flex align-items-center justify-content-between">#}
-                                        {#                                                    <h6 class="font-14">فیلتر های اعمال شده</h6>#}
-                                        {#                                                    <a class="btn border-0" data-bs-toggle="collapse"#}
-                                        {#                                                       href="#collapseItemBox1" role="button" aria-expanded="false">#}
-                                        {#                                                        <i class="bi bi-chevron-down"></i>#}
-                                        {#                                                    </a>#}
-                                        {#                                                </div>#}
-                                        {#                                            </div>#}
-                                        {#                                            <div class="desc collapse show" id="collapseItemBox1">#}
-                                        {#                                                <a href=""#}
-                                        {#                                                   class="btn btn-sm rounded-pill border-1 border-muted me-1 font-14 mb-2">#}
-                                        {#                                                    <span>گوشی الجی</span>#}
-                                        {#                                                    <span class="ms-3"><i#}
-                                        {#                                                            class="bi bi-x text-danger"></i></span></a>#}
-                                        {#                                                <a href=""#}
-                                        {#                                                   class="btn btn-sm rounded-pill border-1 border-muted me-1 font-14 mb-2">#}
-                                        {#                                                    <span>دوربین 108</span>#}
-                                        {#                                                    <span class="ms-3"><i#}
-                                        {#                                                            class="bi bi-x text-danger"></i></span></a>#}
-                                        {#                                            </div>#}
-                                        {#                                        </div>#}
                                         <div class="item-box shadow-box">
                                             <div class="title">
                                                 <div class="form-check form-switch  form-sw-custom">
@@ -188,63 +165,31 @@
                                                          data-bs-parent="#accordionFlushExample">
                                                         <div class="accordion-body">
                                                             <form action="">
-                                                                <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
-                                                                    <div class="form-check">
-                                                                        <label for="colorCheck1"
-                                                                               class="form-check-label">موبایل <i
-                                                                                class="bi bi-phone ms-1"></i></label>
-                                                                        <input type="checkbox" name=""
-                                                                               id="colorCheck1"
-                                                                               class="form-check-input">
-                                                                    </div>
-                                                                    <div>
-                                                                        <span class="fw-bold font-14">(27)</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
-                                                                    <div class="form-check">
-                                                                        <label for="colorCheck5"
-                                                                               class="form-check-label">ایرپاد <i
-                                                                                class="bi bi-earbuds ms-1"></i></label>
-                                                                        <input type="checkbox" name=""
-                                                                               id="colorCheck5"
-                                                                               class="form-check-input">
-                                                                    </div>
-                                                                    <div>
-                                                                        <span class="fw-bold font-14">(32)</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
-                                                                    <div class="form-check">
-                                                                        <label for="colorCheck4"
-                                                                               class="form-check-label">تبلت <i
-                                                                                class="bi bi-tablet ms-1"></i></label>
-                                                                        <input type="checkbox" name=""
-                                                                               id="colorCheck4"
-                                                                               class="form-check-input">
-                                                                    </div>
-                                                                    <div>
-                                                                        <span class="fw-bold font-14">(14)</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
-                                                                    <div class="form-check">
-                                                                        <label for="colorCheck3"
-                                                                               class="form-check-label">هدست <i
-                                                                                class="bi bi-headset ms-1"></i></label>
-                                                                        <input type="checkbox" name=""
-                                                                               id="colorCheck3"
-                                                                               class="form-check-input">
-                                                                    </div>
-                                                                    <div>
-                                                                        <span class="fw-bold font-14">(8)</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="text-center mb-3 mt-2">
-                                                                    <input type="submit"
-                                                                           class="btn main-color-green text-white rounded-pill px-5 py-2"
-                                                                           value="اعمال فیلتر">
-                                                                </div>
+                                                                {% if len <= 0 %}
+                                                                    {% for category in categories %}
+                                                                        <a href="{% url 'products-category' category.slug 1 %}"
+                                                                           class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                                                            <div class="form-check">
+                                                                                <p class="form-check-label">{{ category.title }}</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <span class="fw-bold font-14">({{ category.count }})</span>
+                                                                            </div>
+                                                                        </a>
+                                                                    {% endfor %}
+                                                                {% elif len >= 1 %}
+                                                                    {% for child in children %}
+                                                                        <a href="{% url 'products-category-child' child.parent.slug child.slug 1 %}"
+                                                                           class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                                                            <div class="form-check">
+                                                                                <p class="form-check-label">{{ child.title }}</p>
+                                                                            </div>
+                                                                            <div>
+                                                                                <span class="fw-bold font-14">({{ child.count }})</span>
+                                                                            </div>
+                                                                        </a>
+                                                                    {% endfor %}
+                                                                {% endif %}
                                                             </form>
                                                         </div>
                                                     </div>
@@ -269,33 +214,12 @@
                         <div class="category-bread mt-2">
                             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                                 <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                                    <li class="breadcrumb-item"><a href="{% url 'home-url' %}">خانه</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
                                 </ol>
                             </nav>
                         </div>
                         <div class="item-boxs">
-                            {#                            <div class="item-box shadow-box">#}
-                            {#                                <div class="title">#}
-                            {#                                    <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                        <h6 class="font-14">فیلتر های اعمال شده</h6>#}
-                            {#                                        <a class="btn border-0" data-bs-toggle="collapse" href="#collapseItemBox"#}
-                            {#                                           role="button" aria-expanded="false">#}
-                            {#                                            <i class="bi bi-chevron-down"></i>#}
-                            {#                                        </a>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                                <div class="desc collapse show" id="collapseItemBox">#}
-                            {#                                    <a href=""#}
-                            {#                                       class="btn btn-sm rounded-pill border-1 border-muted me-1 font-14 mb-2">#}
-                            {#                                        <span>گوشی الجی</span>#}
-                            {#                                        <span class="ms-3"><i class="bi bi-x text-danger"></i></span></a>#}
-                            {#                                    <a href=""#}
-                            {#                                       class="btn btn-sm rounded-pill border-1 border-muted me-1 font-14 mb-2">#}
-                            {#                                        <span>دوربین 108</span>#}
-                            {#                                        <span class="ms-3"><i class="bi bi-x text-danger"></i></span></a>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
                             <div class="item-box shadow-box">
                                 <div class="title">
                                     <div class="form-check form-switch  form-sw-custom">
@@ -389,15 +313,12 @@
                                         <div id="flush-collapseThree" class="accordion-collapse collapse"
                                              data-bs-parent="#accordionFlushExample">
                                             <div class="accordion-body">
-                                                {#                                                <form action="">#}
                                                 {% if len <= 0 %}
                                                     {% for category in categories %}
-                                                        <a href="{% url 'products-category' category.slug 1%}"
+                                                        <a href="{% url 'products-category' category.slug 1 %}"
                                                            class="d-flex align-items-center justify-content-between flex-wrap mb-3">
                                                             <div class="form-check">
                                                                 <p class="form-check-label">{{ category.title }}</p>
-                                                                {#                                                            <input type="checkbox" name="" id="colorCheck111"#}
-                                                                {#                                                                   class="form-check-input">#}
                                                             </div>
                                                             <div>
                                                                 <span class="fw-bold font-14">({{ category.count }})</span>
@@ -406,12 +327,10 @@
                                                     {% endfor %}
                                                 {% elif len >= 1 %}
                                                     {% for child in children %}
-                                                        <a href="{% url 'products-category-child' child.parent.slug child.slug 1%}"
+                                                        <a href="{% url 'products-category-child' child.parent.slug child.slug 1 %}"
                                                            class="d-flex align-items-center justify-content-between flex-wrap mb-3">
                                                             <div class="form-check">
                                                                 <p class="form-check-label">{{ child.title }}</p>
-                                                                {#                                                            <input type="checkbox" name="" id="colorCheck111"#}
-                                                                {#                                                                   class="form-check-input">#}
                                                             </div>
                                                             <div>
                                                                 <span class="fw-bold font-14">({{ child.count }})</span>
@@ -419,47 +338,7 @@
                                                         </a>
                                                     {% endfor %}
                                                 {% endif %}
-                                                {#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
-                                                {#                                                        <div class="form-check">#}
-                                                {#                                                            <label for="colorCheck555" class="form-check-label">ایرپاد#}
-                                                {#                                                                <i class="bi bi-earbuds ms-1"></i></label>#}
-                                                {#                                                            <input type="checkbox" name="" id="colorCheck555"#}
-                                                {#                                                                   class="form-check-input">#}
-                                                {#                                                        </div>#}
-                                                {#                                                        <div>#}
-                                                {#                                                            <span class="fw-bold font-14">(32)</span>#}
-                                                {#                                                        </div>#}
-                                                {#                                                    </div>#}
-                                                {#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
-                                                {#                                                        <div class="form-check">#}
-                                                {#                                                            <label for="colorCheck444" class="form-check-label">تبلت#}
-                                                {#                                                                <i#}
-                                                {#                                                                        class="bi bi-tablet ms-1"></i></label>#}
-                                                {#                                                            <input type="checkbox" name="" id="colorCheck444"#}
-                                                {#                                                                   class="form-check-input">#}
-                                                {#                                                        </div>#}
-                                                {#                                                        <div>#}
-                                                {#                                                            <span class="fw-bold font-14">(14)</span>#}
-                                                {#                                                        </div>#}
-                                                {#                                                    </div>#}
-                                                {#                                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">#}
-                                                {#                                                        <div class="form-check">#}
-                                                {#                                                            <label for="colorCheck333" class="form-check-label">هدست#}
-                                                {#                                                                <i#}
-                                                {#                                                                        class="bi bi-headset ms-1"></i></label>#}
-                                                {#                                                            <input type="checkbox" name="" id="colorCheck333"#}
-                                                {#                                                                   class="form-check-input">#}
-                                                {#                                                        </div>#}
-                                                {#                                                        <div>#}
-                                                {#                                                            <span class="fw-bold font-14">(8)</span>#}
-                                                {#                                                        </div>#}
-                                                {#                                                    </div>#}
-                                                {#                                                    <div class="text-center mb-3 mt-2">#}
-                                                {#                                                        <input type="submit"#}
-                                                {#                                                               class="btn main-color-green text-white rounded-pill px-5 py-2"#}
-                                                {#                                                               value="اعمال فیلتر">#}
-                                                {#                                                    </div>#}
-                                                {#                                                </form>#}
+
                                             </div>
                                         </div>
                                     </div>
@@ -476,33 +355,9 @@
                         <div class="content-box">
                             <div class="container-fluid">
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <div class="box_filter d-lg-block d-none">
-                                        <ul class="list-inline text-start mb-0">
-                                            <li class="list-inline-item title-font ms-0">مرتب سازی بر اساس :</li>
-                                            <li class="list-inline-item"><a href="#">گران ترین</a></li>
-                                            <li class="list-inline-item"><a class="active_custom" href="#">ارزان
-                                                ترین</a>
-                                            </li>
-                                            <li class="list-inline-item"><a href="#">پروفروش ترین</a></li>
-                                            <li class="list-inline-item"><a href="#">داغ ترین</a></li>
-                                            <li class="list-inline-item"><a href="#">محبوب ترین</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="box_filter_counter fs-6"><i class="bi bi-card-list me-2"></i> 123
+                                    <div class="box_filter_counter fs-6"><i class="bi bi-card-list me-2"></i> {{ len }}
                                         کالا
                                     </div>
-                                </div>
-                                <div class="d-lg-none d-block">
-                                    <form action="">
-                                        <h5 class="mb-3">مرتب سازی بر اساس</h5>
-                                        <select name="" id="" class="form-select">
-                                            <option value="">گران ترین</option>
-                                            <option value="">ارزان ترین</option>
-                                            <option value="">پرفروش ترین</option>
-                                            <option value="">داغ ترین</option>
-                                            <option value="">محبوب ترین</option>
-                                        </select>
-                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -510,494 +365,7 @@
 
                     <div class="category-pro">
                         <div class="row g-3" id="products-list">
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-1.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-2.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-3.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-4.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-5.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-6.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-7.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-8.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-9.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-10.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-11.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-12.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-13.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-14.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
-                            {#                            <div class="col-md-6 col-xl-4 col-xxl-3">#}
-                            {#                                <div class="product-box">#}
-                            {#                                    <a href="">#}
-                            {#                                        <div class="product-image">#}
-                            {#                                            <img src="/static/img/product/product-2.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid one-image">#}
-                            {#                                            <img src="/static/img/product/product-3.webp" loading="lazy" alt=""#}
-                            {#                                                 class="img-fluid two-image">#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-title">#}
-                            {#                                            <div class="title">#}
-                            {#                                                <p class="text-overflow-1 title-font">دفتر سیمی 85 برگ همیشه طرح انار کد#}
-                            {#                                                    6338</p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                        <div class="product-action">#}
-                            {#                                            <div class="link">#}
-                            {#                                                <button class="btn border-0 rounded-3 main-color-one-bg" href="">#}
-                            {#                                                    <i class="bi bi-basket text-white"></i>#}
-                            {#                                                </button>#}
-                            {#                                            </div>#}
-                            {#                                            <div class="price">#}
-                            {#                                                <p class="old-price">6,500,000 <span#}
-                            {#                                                        class="danger-label rounded-3 ms-2">40%</span></p>#}
-                            {#                                                <p class="new-price">3,175,000 <span class="font-12">تومان</span></p>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </a>#}
-                            {#                                    <div class="product-foot mt-2 border-top border-1 pt-1">#}
-                            {#                                        <div class="d-flex align-items-center justify-content-between">#}
-                            {#                                            <nav class="navbar navbar-expand">#}
-                            {#                                                <ul class="navbar-nav align-items-center">#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="مشاهده سریع"><i#}
-                            {#                                                            class="bi bi-search"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به سبد خرید"><i#}
-                            {#                                                            class="bi bi-basket"></i></a></li>#}
-                            {#                                                    <li class="nav-item"><a href=""#}
-                            {#                                                                            class="nav-item product-box-hover-item product-box-hover-item-btn"#}
-                            {#                                                                            data-bs-toggle="tooltip"#}
-                            {#                                                                            data-bs-placement="top"#}
-                            {#                                                                            data-bs-title="افزودن به علاقه ها"><i#}
-                            {#                                                            class="bi bi-heart"></i></a></li>#}
-                            {#                                                </ul>#}
-                            {#                                            </nav>#}
-                            {#                                            <div class="product-rating">#}
-                            {#                                                <div class="number"><span class="text-muted font-12">(15+) 4.8</span>#}
-                            {#                                                </div>#}
-                            {#                                                <div class="icon"><i class="bi bi-star-fill"></i></div>#}
-                            {#                                            </div>#}
-                            {#                                        </div>#}
-                            {#                                    </div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
+
                             <div class="col-12">
                                 <div class="my-paginate mt-5">
                                     <nav aria-label="Page navigation example">
@@ -1010,61 +378,6 @@
                         </div>
                     </div>
                 </div>
-
-                {#                <div class="col-12">#}
-                {#                    <div class="content-box">#}
-                {#                        <div class="container-fluid">#}
-                {#                            <div class="product-desc-content">#}
-                {#                                <input class="read-more-state" id="readMore3" type="checkbox">#}
-                {#                                <!-- والد بیشتر ، کمتر ، تمام متن توضیحات باید داخل این تگ قرار بگیرند -->#}
-                {#                                <div class="read-more-wrap">#}
-                {#                                    <h6 class="font-22 mb-2 title-font title-line-bottom">دسته بندی لوازم تحریر</h6>#}
-                {##}
-                {#                                    <p>#}
-                {#                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان#}
-                {#                                        گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و#}
-                {#                                        برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای#}
-                {#                                        کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان#}
-                {#                                        جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه#}
-                {#                                        ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می#}
-                {#                                        توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به#}
-                {#                                        پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته#}
-                {#                                        اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد...#}
-                {#                                    </p>#}
-                {##}
-                {#                                    <!-- متن بیشتر -->#}
-                {#                                    <div class="read-more-target">#}
-                {#                                        <p>#}
-                {#                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از#}
-                {#                                            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که#}
-                {#                                            لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود#}
-                {#                                            ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده#}
-                {#                                            شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را#}
-                {#                                            برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی#}
-                {#                                            ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه#}
-                {#                                            راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی#}
-                {#                                            دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد#}
-                {#                                            استفاده قرار گیرد.#}
-                {#                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از#}
-                {#                                            طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که#}
-                {#                                            لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود#}
-                {#                                            ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده#}
-                {#                                            شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را#}
-                {#                                            برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی#}
-                {#                                            ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه#}
-                {#                                            راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی#}
-                {#                                            دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد#}
-                {#                                            استفاده قرار گیرد.#}
-                {#                                        </p>#}
-                {#                                    </div>#}
-                {#                                    <!-- پایان متن بیشتر -->#}
-                {#                                </div>#}
-                {#                                <!-- پایان والد بیشتر کمتر -->#}
-                {#                                <label class="read-more-trigger" for="readMore3"></label>#}
-                {#                            </div>#}
-                {#                        </div>#}
-                {#                    </div>#}
-                {#                </div>#}
             </div>
         </div>
     </div>

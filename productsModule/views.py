@@ -19,9 +19,11 @@ from usersModule.models import UsersModel
 class CategoriesView(View):
     def get(self, request, num):
         queryset = CategoryModel.objects.filter(parent=None, isActive=True, isDelete=False)
+        count = ProductsModel.objects.all().count()
         return render(request, 'category-page.html', {
             'categories': queryset,
-            'num': num
+            'num': num,
+            'count': count
         })
 
     def post(self, request, num):
@@ -202,16 +204,6 @@ class ProductDetailView(View):
             return redirect('404')
 
     def post(self, request, slug):
-        # product = ProductsModel.objects.filter(slug=slug).first()
-        # if product is not None:
-        #     return render(request, 'product-detail-page.html', {
-        #         'title': product.title,
-        #         'parent': product.category.parent.title,
-        #         'parent_slug': product.category.parent.slug,
-        #         'category': product.category.title,
-        #         'category_slug': product.category.slug
-        #     })
-        # else:
         return redirect('404')
 
 
@@ -285,14 +277,15 @@ class ProductSearchView(View):
 
             return render(request, 'product-search-page.html',{
                 'value': value,
+                'count': ProductsModel.objects.filter(title__contains=value, isActive=True, isDelete=False).count(),
                 'categories': queryset,
-                'num': num
+                'num': num,
             })
         else:
             return render(request, 'product-search-not-found-page.html')
 
     def post(self, request, value, num):
-        pass
+        return render(request, 'product-search-page.html')
 
 
 class ProductSearchAPIView(APIView, PageNumberPagination):

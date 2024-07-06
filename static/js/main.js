@@ -28,12 +28,12 @@ $(function () {
     })
 
     ///شمارنده محصول برای اضافه کردن به سبد خرید
-    $("input.counter").TouchSpin({
-        min: 1,
-        max: '1000000000000000',
-        buttondown_class: "btn-counter waves-effect waves-light",
-        buttonup_class: "btn-counter waves-effect waves-light"
-    });
+    // $("input.counter").TouchSpin({
+    //     min: 1,
+    //     max: '1000000000000000',
+    //     buttondown_class: "btn-counter waves-effect waves-light",
+    //     buttonup_class: "btn-counter waves-effect waves-light"
+    // });
 
     ///انتخاب گر رنگ
     $(".category-sort .form-checks .form-check").click(function () {

@@ -1,6 +1,9 @@
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
+from django.utils.html import strip_tags
 from django.views import View
 from django.contrib.auth import login
 from rest_framework.views import APIView
@@ -44,10 +47,20 @@ class RegisterAPIView(APIView):
                 if user is None:
                     if password == confirm_password:
                         token = get_random_string(80)
-                        new_user = UsersModel(name=username, email=email, emailActivateCode=activeCode(6), token=token,
+                        code = activeCode(6)
+                        new_user = UsersModel(name=username, email=email, emailActivateCode=code, token=token,
                                               is_active=False)
                         new_user.set_password(password)
-                        # send email
+                        message = render_to_string('email.html', {'code': code})
+                        plain_messege = strip_tags(message)
+                        send_mail(
+                            'Verify Code',
+                            plain_messege,
+                            'settings.EMAIL_HOST_USER',
+                            [email],
+                            fail_silently=False,
+                            html_message=message
+                        )
                         new_user.save()
                         return Response({'message': 'accept', 'token': token})
                     else:
@@ -71,8 +84,18 @@ class ConfirmEmailView(View):
 
     def post(self, request, token):
         user = UsersModel.objects.filter(token=token).first()
-        user.emailActivateCode = activeCode(6)
-        # send email
+        code = activeCode(6)
+        user.emailActivateCode = code
+        message = render_to_string('email.html', {'code': code})
+        plain_messege = strip_tags(message)
+        send_mail(
+            'Verify Code',
+            plain_messege,
+            'settings.EMAIL_HOST_USER',
+            [user.email],
+            fail_silently=False,
+            html_message=message
+        )
         user.save()
         return render(request, 'confirm-email.html')
 
@@ -159,10 +182,20 @@ class ForgetPasswordAPIView(APIView):
             user = UsersModel.objects.filter(email=email, name=username).first()
             if user is not None:
                 if user.is_active:
-                    user.emailActivateCode = activeCode(6)
+                    code = activeCode(6)
+                    user.emailActivateCode = code
                     user.token = get_random_string(80)
                     user.save()
-                    # send email
+                    message = render_to_string('email.html', {'code': code})
+                    plain_messege = strip_tags(message)
+                    send_mail(
+                        'Verify Code',
+                        plain_messege,
+                        'settings.EMAIL_HOST_USER',
+                        [email],
+                        fail_silently=False,
+                        html_message=message
+                    )
                     return Response({'message': 'accept', 'token': user.token})
                 else:
                     return Response({'message': 'نام کاربری یا ایمیل اشتباه است'})
@@ -183,8 +216,18 @@ class ForgetPasswordConfirmView(View):
 
     def post(self, request, token):
         user = UsersModel.objects.filter(token=token).first()
-        user.emailActivateCode = activeCode(6)
-        # send email
+        code = activeCode(6)
+        user.emailActivateCode = code
+        message = render_to_string('email.html', {'code': code})
+        plain_messege = strip_tags(message)
+        send_mail(
+            'Verify Code',
+            plain_messege,
+            'settings.EMAIL_HOST_USER',
+            [user.email],
+            fail_silently=False,
+            html_message=message
+        )
         user.save()
         return render(request, 'forget-password-confirm-page.html')
 
@@ -222,8 +265,18 @@ class ChangePasswordView(View):
 
     def post(self, request, token, code):
         user = UsersModel.objects.filter(token=token).first()
-        user.emailActivateCode = activeCode(6)
-        # send email
+        emailCode = activeCode(6)
+        user.emailActivateCode = emailCode
+        message = render_to_string('email.html', {'code': emailCode})
+        plain_messege = strip_tags(message)
+        send_mail(
+            'Verify Code',
+            plain_messege,
+            'settings.EMAIL_HOST_USER',
+            [user.email],
+            fail_silently=False,
+            html_message=message
+        )
         user.save()
         return render(request, 'change-password-page.html')
 

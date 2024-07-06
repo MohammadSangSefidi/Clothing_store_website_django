@@ -1,6 +1,6 @@
 let addressList = document.getElementById('address-list')
 
-let addressEndpoint = `http://127.0.0.1:8000/userPanel/${num_input.value}/address/${userId}/`
+let addressEndpoint = `${baseURL}/userPanel/${num_input.value}/address/${userId}/`
 let addressOption = {
     method: "GET",
     headers: {
@@ -24,7 +24,7 @@ button.addEventListener('click', function (event) {
     let addressInput = document.getElementById('floatingInputStreet1').value
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const url = `http://127.0.0.1:8000/userPanel/${num_input.value}/address/${userId}/createAddress/`;
+    const url = `${baseURL}/userPanel/${num_input.value}/address/${userId}/createAddress/`;
     const data = {
         user: userId,
         city: cityInput,
@@ -47,7 +47,7 @@ button.addEventListener('click', function (event) {
             let message = JSON.stringify(data['message'])
             if (message === '"accept"') {
                 errorBox.innerHTML = ''
-                window.location.href = `http://127.0.0.1:8000/userPanel/${num_input.value}/`
+                window.location.href = `${baseURL}/userPanel/${num_input.value}/`
             } else {
                 errorBox.innerHTML = message.replace(/\"/g, "")
             }

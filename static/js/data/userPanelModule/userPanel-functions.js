@@ -37,7 +37,7 @@ function add_address(data, list, userId) {
 }
 
 function delete_address(num, userId, addressId, listId, boxId) {
-    const url = `http://127.0.0.1:8000/userPanel/${num}/address/${userId}/deleteAddress/${addressId}/`;
+    const url = `${baseURL}/userPanel/${num}/address/${userId}/deleteAddress/${addressId}/`;
     fetch(url, {
         method: 'GET',
         headers: {

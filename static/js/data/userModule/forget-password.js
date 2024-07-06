@@ -3,7 +3,7 @@ button.addEventListener('click', function (event) {
     event.preventDefault();
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const url = 'http://127.0.0.1:8000/user/login/forget-password/checkInfo/';
+    const url = baseURL + '/user/login/forget-password/checkInfo/';
     const data = {
         email: document.getElementById('floatingInputEmail').value,
         name: document.getElementById('floatingInputUsername').value,
@@ -26,7 +26,7 @@ button.addEventListener('click', function (event) {
             if (message === '"accept"') {
                 errorBox.innerHTML = ''
                 let token = JSON.stringify(data['token'])
-                window.location.href = `http://127.0.0.1:8000/user/login/forget-password/${token.replace(/\"/g, "")}`
+                window.location.href = `${baseURL}/user/login/forget-password/${token.replace(/\"/g, "")}`
             } else {
                 errorBox.innerHTML = message.replace(/\"/g, "")
             }

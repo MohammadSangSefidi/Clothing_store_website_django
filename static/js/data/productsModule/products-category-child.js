@@ -20,8 +20,8 @@ fetch(productsEndpoint, productsOption)
     .then(response => response.json())
     .then(data => {
         if (data.detail === 'صفحه نامعتبر'){
-            document.location.href= 'http://127.0.0.1:8000/404_page/'
+            document.location.href= baseURL + '/404_page/'
         }
-        add_pagination(data, pagination_div, num_input, `http://127.0.0.1:8000/products/categories/${slug_input.value}/${child_input.value}/`, 5)
+        add_pagination(data, pagination_div, num_input, baseURL +`/products/categories/${slug_input.value}/${child_input.value}/`, 5)
         add_products(data.results, productsList, userId)
     })

@@ -1,5 +1,5 @@
 let categorySlider = document.getElementById('category-slider')
-let categoryEndpoint = 'http://127.0.0.1:8000/products/categories/gotCategory/'
+let categoryEndpoint = baseURL + '/products/categories/gotCategory/'
 let categoryoption = {
     method: "GET",
     headers: {
@@ -17,7 +17,7 @@ fetch(categoryEndpoint, categoryoption)
     })
 
 
-let best_sellingEndpoint = 'http://127.0.0.1:8000/products/gotProducts/bestSelling/'
+let best_sellingEndpoint = baseURL + '/products/gotProducts/bestSelling/'
 let best_sellingSellOption = {
     method: "GET",
     headers: {
@@ -34,7 +34,7 @@ fetch(best_sellingEndpoint, best_sellingSellOption)
     })
 
 
-let newestEndpoint = 'http://127.0.0.1:8000/products/gotProducts/newest/'
+let newestEndpoint = baseURL + '/products/gotProducts/newest/'
 let newestOption = {
     method: "GET",
     headers: {

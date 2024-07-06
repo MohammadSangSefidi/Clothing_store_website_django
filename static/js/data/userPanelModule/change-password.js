@@ -3,7 +3,7 @@ let ChangePasswordButton = document.getElementById('save-new-password-button')
 ChangePasswordButton.addEventListener('click', function (event) {
     event.preventDefault();
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const url = `http://127.0.0.1:8000/userPanel/${num_input.value}/changePassword/${userId}/`;
+    const url = `${baseURL}/userPanel/${num_input.value}/changePassword/${userId}/`;
     const data = {
         oldPassword: document.getElementById('floatingInputoldPasswd').value,
         password: document.getElementById('floatingInputNewPasswd').value,
@@ -25,7 +25,7 @@ ChangePasswordButton.addEventListener('click', function (event) {
             let message = JSON.stringify(data['message'])
             if (message === '"accept"') {
                 errorBox.innerHTML = ''
-                window.location.href = `http://127.0.0.1:8000/user/login/`
+                window.location.href = `${baseURL}/user/login/`
             } else {
                 errorBox.innerHTML = message.replace(/\"/g, "")
             }

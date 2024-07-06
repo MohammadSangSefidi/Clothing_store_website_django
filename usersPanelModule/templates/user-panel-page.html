@@ -11,6 +11,7 @@
         {% else %}
             <input type="hidden" id="is-login" value="None">
         {% endif %}
+        <input type="hidden" id="num-input" value="{{ num }}">
         <div class="container-fluid">
 
             <div class="custom-filter d-lg-none d-block">
@@ -41,60 +42,30 @@
                                 </div>
                                 <div class="panel-nav-nav">
                                     <ul class="rm-item-menu navbar-nav">
-                                        <li class="nav-item active"><a href="index.html" class="nav-link"><i
-                                                class="bi bi-house box-icon"></i><span>پروفایل <small
-                                                class="badge rounded-pill bg-warning text-dark">5</small></span> </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a href="index.html" class="nav-link"><i
-                                                    class="bi bi-menu-app box-icon"></i><span>زیر منو دار</span></a>
-                                            <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                            <ul class="navbar-nav h-0">
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="">منو شماره 1</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="">منو شماره 2</a>
-                                                </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="">منو شماره 3</a>
-                                                    <span class="showSubMenu"><i class="bi bi-chevron-left"></i></span>
-                                                    <ul class="navbar-nav h-0 bg-ul-f7">
-                                                        <li class="nav-item"><a href="" class="nav-link">منو شماره 1</a>
-                                                        </li>
-                                                        <li class="nav-item"><a href="" class="nav-link">منو شماره 2</a>
-                                                        </li>
-                                                        <li class="nav-item"><a href="" class="nav-link">منو شماره 3</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-cart-check box-icon"></i>سفارش های من </a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-pin-map box-icon"></i>آدرس های من</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-bell box-icon"></i>پیام ها و اطلاعیه ها</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-chat-dots box-icon"></i>نظرات من</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-question-circle box-icon"></i>درخواست پشتیبانی</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-heart box-icon"></i>محصولات مورد علاقه</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-gift box-icon"></i>کد های تخفیف من</a>
-                                        </li>
-                                        <li class="nav-item"><a class="nav-link" href="">
-                                            <i class="bi bi-arrow-right-square box-icon"></i>خروج از حساب کاربری</a>
-                                        </li>
+                                        <li class="nav-item active" id="orders-button-mobile">
+                                        <a class="nav-link" href="">
+                                            <i class="bi bi-cart-check box-icon"></i><span class="panel-active"
+                                                                                           id="orders-text-mobile"> سفارش های من </span></a>
+                                    </li>
+                                    <li class="nav-item" id="change-password-button-mobile">
+                                        <a class="nav-link" href="">
+                                            <i class="bi bi-shield box-icon"></i><span class=""
+                                                                                       id="change-password-text-mobile">تغیر رمز عبور</span></a>
+                                    </li>
+                                    <li class="nav-item" id="address-button-mobile">
+                                        <a class="nav-link" href="">
+                                            <i class="bi bi-pin-map box-icon"></i><span class="" id="address-text-mobile">آدرس های من</span></a>
+                                    </li>
+                                    <li class="nav-item" id="favorites-button-mobile">
+                                        <a class="nav-link" href="">
+                                            <i class="bi bi-heart box-icon"></i><span class="" id="favorites-text-mobile">محصولات مورد علاقه</span></a>
+                                    </li>
 
+                                    <li class="nav-item" id="log-out-button">
+                                        <a class="nav-link" href="{% url 'log-out' 1 %}">
+                                            <i class="bi bi-arrow-right-square box-icon"></i><span class=""
+                                                                                                   id="log-out-text">خروج از حساب کاربری</span></a>
+                                    </li>
                                     </ul>
                                 </div>
                             </div>
@@ -173,73 +144,92 @@
                                     <th class="title-font">جزییات</th>
                                 </tr>
                                 </thead>
-                                <tbody class="text-center">
-                                <tr>
-                                    <td class="font-14">1</td>
-                                    <td class="font-14">2354632</td>
-                                    <td class="font-14">سه شنبه 13 دی 1401</td>
-                                    <td class="font-14">580,000 تومان</td>
-                                    <td class="font-14"><a href="" class="title-font">سفارش مرجوع شده</a></td>
-                                    <td class="font-14">
-                                        <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i
-                                                class="bi bi-chevron-left"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-14">2</td>
-                                    <td class="font-14">2354632</td>
-                                    <td class="font-14">سه شنبه 13 دی 1401</td>
-                                    <td class="font-14">580,000 تومان</td>
-                                    <td class="font-14"><a href="" class="title-font">سفارش لغو شده</a></td>
-                                    <td class="font-14">
-                                        <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i
-                                                class="bi bi-chevron-left"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-14">1</td>
-                                    <td class="font-14">2354632</td>
-                                    <td class="font-14">سه شنبه 13 دی 1401</td>
-                                    <td class="font-14">580,000 تومان</td>
-                                    <td class="font-14"><a href="" class="title-font">سفارش تحویل داده شده</a></td>
-                                    <td class="font-14">
-                                        <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i
-                                                class="bi bi-chevron-left"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="font-14">2</td>
-                                    <td class="font-14">2354632</td>
-                                    <td class="font-14">سه شنبه 13 دی 1401</td>
-                                    <td class="font-14">580,000 تومان</td>
-                                    <td class="font-14"><a href="" class="title-font">سفارش در انتظار پرداخت</a></td>
-                                    <td class="font-14">
-                                        <a href="" class="btn border-0 main-color-one-bg waves-effect waves-light"><i
-                                                class="bi bi-chevron-left"></i></a>
-                                    </td>
-                                </tr>
+                                <tbody class="text-center" id="orders-list">
+
                                 </tbody>
                             </table>
                         </div>
                     </div>
                     <div class="my-paginate mt-5">
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item disabled">
-                                    <a class="page-link rounded-3" href="#"><i class="bi bi-chevron-right"></i></a>
-                                </li>
-                                <li class="page-item active"><a class="page-link rounded-3" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link rounded-3" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link rounded-3" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link rounded-3" href="#">...</a></li>
-                                <li class="page-item"><a class="page-link rounded-3" href="#">14</a></li>
-                                <li class="page-item"><a class="page-link rounded-3" href="#">15</a></li>
-                                <li class="page-item"><a class="page-link rounded-3" href="#">16</a></li>
-                                <li class="page-item">
-                                    <a class="page-link rounded-3" href="#"><i class="bi bi-chevron-left"></i></a>
-                                </li>
+                            <ul class="pagination justify-content-center" id="pagination-div">
+
                             </ul>
                         </nav>
+                    </div>
+                </div>
+                <!-------------------->
+                <div class="col-lg-9 dis-none" id="order_detail">
+                    <div class="content-box bg-white shadow-box">
+                        <div class="container-fluid">
+                            <div class="d-flex flex-wrap justify-content-sm-between align-items-baseline border-bottom">
+                                <h5 class="font-18 pb-3">
+                                    <a class="me-3" href=""><i class="bi bi-chevron-right"></i></a>
+                                    جزئیات سفارش
+                                    <span class="ms-2 font-14 text-muted">
+                                        (پرداخت شده)
+                                    </span>
+                                </h5>
+                                <div>
+                                    <div class=" d-inline-block me-3" id="order-id-div">
+                                        <span class="main-color-one-color fw-bold">شماره سفارش:</span> 3855384
+                                    </div>
+                                    <div class="d-inline-block" id="order-data-time-div">
+                                        <i class="bi bi-clock-fill me-2"></i>
+                                        1401/12/25 - 17:06:15
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail-order mt-3">
+                                <div class="detail-order-item d-flex align-items-center">
+                                    <h6><i class="bi bi-pin-map-fill me-1"></i> آدرس تحویل:</h6>
+                                    <span class="ms-2 text-muted" id="order-address-div">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</span>
+                                </div>
+                                <div class="detail-order-item mt-3 d-flex align-items-center">
+                                    <h6><i class="bi bi-person-fill me-1"></i>تحویل گیرنده:</h6>
+                                    <span class="ms-2 text-muted">{{ request.user.name }}</span>
+                                </div>
+                                <div class="detail-order-item mt-3 d-flex align-items-center">
+                                    <h6><i class="bi bi-telephone-fill me-1"></i>ایمیل:</h6>
+                                    <span class="ms-2 text-muted">{{ request.user.email }}</span>
+                                </div>
+                            </div>
+
+                            <ul class="row gy-3 ps-0 mt-4" id="order-products-list">
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="order-details__bill">
+                        <div class="order-details__bill-title">
+                            <span class="bold-text">جزئیات قیمت</span>
+                            <div class="order-details__bill-icon order-details__bill-icon--colored"></div>
+                        </div>
+                        <div class="order-details__bill-details">
+                            <div class="order-details__bill-row order-details__bill-row--top">
+                                <div class="bill-row__col">
+                                    <label>جمع مبلغ کالاها:</label>
+                                    <div class="cart__item-price" id="sum-prices-div">25,000,000 <span>تومان</span></div>
+                                </div>
+                                <div class="bill-row__col">
+                                    <label>مجموع تخفیف ها:</label>
+                                    <div class="cart__item-price" id="sum-discounts-div">5,000,000 <span>تومان</span></div>
+                                </div>
+                            </div>
+                            <div class="order-details__bill-row order-details__bill-row--top">
+                                <div class="bill-row__col">
+                                    <label> هزینه ارسال و بسته بندی: </label>
+                                    <div class="cart__item-price">0<span>تومان</span></div>
+                                </div>
+                                <div class="bill-row__col">
+                                    <label class="me-1"> مبلغ پرداخت شده: </label>
+                                    <div class="cart__item-price main-color-green-color" id="finall-price-div">90,000,000 <span>تومان</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <!-------------------->
@@ -253,26 +243,6 @@
                     <div class="content-box slider-parent rounded-4">
                         <div class="container-fluid">
                             <div class="row" id="address-list">
-                                {#                                <div class="col-md-4">#}
-                                {#                                    <div class="bg-white card addresses-item mb-4 shadow-sm">#}
-                                {#                                        <div class="gold-members p-4">#}
-                                {#                                            <div class="media">#}
-                                {#                                                <div class="media-body">#}
-                                {#                                                    <h6 class="mb-1">خانه</h6>#}
-                                {#                                                    <p class="text-overflow-2 address-line">#}
-                                {#                                                    </p>#}
-                                {#                                                    <p class="mb-0 text-black font-weight-bold">#}
-                                {#                                                        <a class="me-3" data-bs-toggle="modal"#}
-                                {#                                                           data-bs-target="#addressModal" href="#"><i#}
-                                {#                                                                class="bi bi-pencil"></i> </a>#}
-                                {#                                                        <a class="text-danger" data-toggle="modal"#}
-                                {#                                                           data-target="#delete-address-modal" href="#"><i#}
-                                {#                                                                class="bi bi-trash"></i> </a></p>#}
-                                {#                                                </div>#}
-                                {#                                            </div>#}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
                             </div>
                             <div class="da-action" id="add-address-button">
                                 <a href="" class="btn main-color-one-bg border-0 btn-lg">افزودن آدرس</a>
@@ -332,7 +302,9 @@
                                     </div>
                                     <p class="text-danger text-center" id="address-error"></p>
                                     <div class="col-12">
-                                        <button type="submit" class="btn main-color-one-bg px-3 py-2" id="save-address">ثبت آدرس</button>
+                                        <button type="submit" class="btn main-color-one-bg px-3 py-2" id="save-address">
+                                            ثبت آدرس
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -351,48 +323,11 @@
                     <div class="content-box slider-parent rounded-4">
                         <div class="container-fluid">
                             <ul class="row gy-3 ps-0" id="favorite-products-list">
-                                {#                                <div class="col-sm-6">#}
-                                {#                                    <div class="cart-canvas border rounded-3 p-3">#}
-                                {#                                        <div class="row align-items-center">#}
-                                {#                                            <div class="col-4 ps-0">#}
-                                {#                                                <img src="../img/product/product-5.webp" width="200" alt="">#}
-                                {#                                            </div>#}
-                                {#                                            <div class="col-8">#}
-                                {#                                                <h3 class="text-overflow-2 font-16">ساعت مچی عقربه‌ای مردانه اینویکتا#}
-                                {#                                                    مدل#}
-                                {#                                                    Automatico Ghost Reserve#}
-                                {#                                                </h3>#}
-                                {#                                                <div class="product-box-suggest-price my-2  d-flex align-items-center justify-content-between">#}
-                                {#                                                    <ins class="font-25 ms-0">2,500,000 <span>تومان</span></ins>#}
-                                {#                                                </div>#}
-                                {#                                                <div class="cart-canvas-foot d-flex align-items-center justify-content-between">#}
-                                {#                                                    <div class="cart-canvas-delete">#}
-                                {#                                                        <a href="" class="btn"><i class="bi bi-x"></i></a>#}
-                                {#                                                    </div>#}
-                                {#                                                </div>#}
-                                {#                                            </div>#}
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
+
                             </ul>
                             <div class="my-paginate mt-5">
                                 <nav aria-label="Page navigation example">
-                                    <input type="hidden" id="num-input" value="{{ num }}">
                                     <ul class="pagination justify-content-center" id="favorite-pagination-div">
-                                        {#                                        <li class="page-item disabled">#}
-                                        {#                                            <a class="page-link rounded-3" href="#"><i class="bi bi-chevron-right"></i></a>#}
-                                        {#                                        </li>#}
-                                        {#                                        <li class="page-item active"><a class="page-link rounded-3" href="#">1</a></li>#}
-                                        {#                                        <li class="page-item"><a class="page-link rounded-3" href="#">2</a></li>#}
-                                        {#                                        <li class="page-item"><a class="page-link rounded-3" href="#">3</a></li>#}
-                                        {#                                        <li class="page-item"><a class="page-link rounded-3" href="#">...</a></li>#}
-                                        {#                                        <li class="page-item"><a class="page-link rounded-3" href="#">14</a></li>#}
-                                        {#                                        <li class="page-item"><a class="page-link rounded-3" href="#">15</a></li>#}
-                                        {#                                        <li class="page-item"><a class="page-link rounded-3" href="#">16</a></li>#}
-                                        {#                                        <li class="page-item">#}
-                                        {#                                            <a class="page-link rounded-3" href="#"><i#}
-                                        {#                                                    class="bi bi-chevron-left"></i></a>#}
-                                        {#                                        </li>#}
                                     </ul>
                                 </nav>
                             </div>
@@ -441,7 +376,8 @@
                                     <p class="text-danger text-center my-md-1" id="change-password-error"></p>
                                     <div class="col-12">
                                         <input type="submit" value="تغییر"
-                                               class="btn main-color-one-bg px-5 w-100-in-400 pt-2" id="save-new-password-button">
+                                               class="btn main-color-one-bg px-5 w-100-in-400 pt-2"
+                                               id="save-new-password-button">
                                     </div>
                                 </div>
                             </form>
@@ -463,4 +399,5 @@
     <script src="/static/js/data/userPanelModule/favorites-products.js"></script>
     <script src="/static/js/data/userPanelModule/address-page.js"></script>
     <script src="/static/js/data/userPanelModule/change-password.js"></script>
+    <script src="/static/js/data/userPanelModule/orders-page.js"></script>
 {% endblock %}

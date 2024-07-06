@@ -4,6 +4,8 @@ from .views import *
 urlpatterns = [
     path('<num>/', UserPanelView.as_view(), name='user-panel'),
     path('<num>/logOut/', LogOutView.as_view(), name='log-out'),
+    path('<num>/orders/<userId>/', OrdersAPIView.as_view()),
+    path('<num>/orders/<userId>/<orderId>/', OrderItemsAPIView.as_view()),
     path('<num>/favorites/<userId>/', FavoriteProductsAPIView.as_view()),
     path('<num>/changePassword/<userId>/', ChangePasswordAPIView.as_view()),
     path('<num>/address/<userId>/', AddressAPIView.as_view()),

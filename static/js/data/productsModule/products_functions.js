@@ -6,7 +6,7 @@ function add_category_box(categories, list) {
             let slug = JSON.stringify(category.slug)
             let image_url = category.image_url
             list.innerHTML = `<div class="swiper-slide">
-                        <a href="http://127.0.0.1:8000/products/categories/${slug.replace(/\"/g, "")}/1">
+                        <a href="${baseURL}/products/categories/${slug.replace(/\"/g, "")}/1">
                             <div class="slider-category-item">
                                 <div class="slider-category-item-title">
                                     <h6>${title.replace(/\"/g, "")}</h6>
@@ -23,7 +23,7 @@ function add_category_box(categories, list) {
 }
 
 async function checkFavorite(slug, userId) {
-    let checkFavoriteEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/checkFavorite/${userId}`
+    let checkFavoriteEndpoint = `${baseURL}/products/detail/${slug}/checkFavorite/${userId}`
     let checkFavoriteOption = {
         method: "GET",
         headers: {
@@ -72,7 +72,7 @@ async function add_products(data, list, userId) {
         }
         list.innerHTML = `<div class="col-md-6 col-xl-4 col-xxl-3">
                                 <div class="product-box">
-                                    <a href="http://127.0.0.1:8000/products/detail/${slug.replace(/\"/g, "")}/">
+                                    <a href="${baseURL}/products/detail/${slug.replace(/\"/g, "")}/">
                                         <div class="product-image">
                                             <img src='${image1}' loading="lazy" alt=""
                                                  class="img-fluid one-image">
@@ -105,7 +105,7 @@ async function add_products(data, list, userId) {
                                                                             data-bs-placement="top"
                                                                             data-bs-title="مشاهده سریع"><i
                                                             class="bi bi-search"></i></a></li>
-                                                    <li class="nav-item"><a href=""
+                                                    <li class="nav-item"><a href="http://127.0.0.1:8000/products/detail/${slug.replace(/\"/g, "")}/"
                                                                             class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
@@ -157,7 +157,7 @@ function add_products_slider(data, list, needTimer) {
         }
         list.innerHTML = `<div class="swiper-slide">
                                 <div class="product-box">
-                                    <a href="http://127.0.0.1:8000/products/detail/${slug.replace(/\"/g, "")}/">
+                                    <a href="${baseURL}/products/detail/${slug.replace(/\"/g, "")}/">
                                         <div class="product-image">
                                             <img src='${image1}' loading="lazy" alt=""
                                                  class="img-fluid one-image">
@@ -190,7 +190,7 @@ function add_products_slider(data, list, needTimer) {
                                                                             data-bs-placement="top"
                                                                             data-bs-title="مشاهده سریع"><i
                                                             class="bi bi-search"></i></a></li>
-                                                    <li class="nav-item"><a href=""
+                                                    <li class="nav-item"><a href="${baseURL}/products/detail/${slug.replace(/\"/g, "")}/"
                                                                             class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"
@@ -236,15 +236,6 @@ function add_pagination(data, pagination_div, num_input, url, length) {
             pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item hover_pagination" onclick="change_page(${num}, '${url}')"><a class="page-link rounded-3">${num}</a></li>`
         }
     }
-    // } else {
-    //     for (let num of range(1, 3)) {
-    //         pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item"><a class="page-link rounded-3" href="#">${num}</a></li>`
-    //     }
-    //     pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item disabled"><a class="page-link rounded-3" href="#">...</a></li>`
-    //     pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item"><a class="page-link rounded-3" href="#">${data.count - 2}</a></li>`
-    //     pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item"><a class="page-link rounded-3" href="#">${data.count - 1}</a></li>`
-    //     pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item"><a class="page-link rounded-3" href="#">${data.count - 0}</a></li>`
-    // }
     if (data.next === null) {
         pagination_div.innerHTML = pagination_div.innerHTML + `<li class="page-item disabled hover_pagination"><a class="page-link rounded-3" href="#"><i class="bi bi-chevron-left"></i></a></li>`
     } else {
@@ -268,7 +259,7 @@ function range(start, end) {
 function add_favorite(slug, buttonId, userId) {
     let button = document.getElementById(buttonId)
     if (userId !== 'None') {
-        let addFavoriteEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/addFavorite/${userId}/`
+        let addFavoriteEndpoint = `${baseURL}/products/detail/${slug}/addFavorite/${userId}/`
         let addFavoriteOption = {
             method: "POST",
             headers: {

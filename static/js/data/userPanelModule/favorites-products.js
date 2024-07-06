@@ -6,7 +6,7 @@ let num_input = document.getElementById('num-input')
 
 function remove_favorite(slug, userId, listId, boxId) {
     if (userId !== 'None') {
-        let addFavoriteEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/addFavorite/${userId}/`
+        let addFavoriteEndpoint = `${baseURL}/products/detail/${slug}/addFavorite/${userId}/`
         let addFavoriteOption = {
             method: "POST",
             headers: {
@@ -62,7 +62,7 @@ function remove_favorite(slug, userId, listId, boxId) {
     }
 }
 
-let favoriteProductsEndpoint = `http://127.0.0.1:8000/userPanel/${num_input.value}/favorites/${userId}/`
+let favoriteProductsEndpoint = `${baseURL}/userPanel/${num_input.value}/favorites/${userId}/`
 let favoriteProductsOption = {
     method: "GET",
     headers: {
@@ -85,7 +85,7 @@ fetch(favoriteProductsEndpoint, favoriteProductsOption)
                                     <div class="cart-canvas border rounded-3 p-3">
                                         <div class="row align-items-center">
                                             <div class="col-4 ps-0">
-                                                <a href="http://127.0.0.1:8000/products/detail/${slug}/"><img src="${image1}" width="200" alt=""></a>
+                                                <a href="${baseURL}/products/detail/${slug}/"><img src="${image1}" width="200" alt=""></a>
                                             </div>
                                             <div class="col-8">
                                                 <h3 class="text-overflow-2 font-16">

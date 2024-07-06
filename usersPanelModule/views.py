@@ -6,7 +6,10 @@ from django.views import View
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 
+from cartModule.serializers import GotCartInfoSerializer, GotCartsItemsSerializer
+from cartModule.models import CartModel
 from homeModule.authentication import TokenAuthenticationCustom
 from productsModule.serializers import ProductsSerializer
 from usersModule.models import UsersModel
@@ -38,6 +41,38 @@ class LogOutView(View):
         pass
 
 
+class OrderItemsAPIView(APIView):
+    authentication_classes = [TokenAuthenticationCustom]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, num, userId, orderId):
+        user = UsersModel.objects.filter(id=userId).first()
+        if user is not None:
+            cart = user.cartmodel_set.filter(id=orderId).first()
+            cartItems = GotCartsItemsSerializer(cart.cartsitemsmodel_set.all(), many=True).data
+            cartInfo = GotCartInfoSerializer(cart).data
+            return Response({'message': cartItems, 'cartInfo': cartInfo})
+        else:
+            return Response({'message': 'user is not valid'})
+
+    def post(self, request, num, userId, orderId):
+        return Response({'message': 'post is not allowed'})
+
+
+class OrdersAPIView(APIView, PageNumberPagination):
+    authentication_classes = [TokenAuthenticationCustom]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, num, userId):
+        queryset = CartModel.objects.filter(user_id=userId)
+        paginated_orders = self.paginate_queryset(queryset, request, view=self)
+        data = GotCartInfoSerializer(paginated_orders, many=True).data
+        return self.get_paginated_response(data)
+
+    def post(self, request, num, userId):
+        return Response({'message': 'post is not allowed'})
+
+
 class FavoriteProductsAPIView(APIView):
     authentication_classes = [TokenAuthenticationCustom]
     permission_classes = [IsAuthenticated]
@@ -58,7 +93,7 @@ class AddressAPIView(APIView):
 
     def get(self, request, num, userId):
         user = UsersModel.objects.filter(id=userId).first()
-        queryset = user.addressmodel_set.all()
+        queryset = user.addressmodel_set.filter(is_delete=False)
         data = AddressSerializer(queryset, many=True).data
         return Response(data)
 
@@ -99,7 +134,8 @@ class DeleteAddressAPIView(APIView):
         if user is not None:
             address = AddressModel.objects.filter(id=int(addressId), user_id=int(userId)).first()
             if address is not None:
-                address.delete(keep_parents=True)
+                address.is_delete = True
+                address.save()
                 return Response({'message': 'accept'})
             else:
                 return Response({'message': 'آیدی آدرس درست نیست.'})

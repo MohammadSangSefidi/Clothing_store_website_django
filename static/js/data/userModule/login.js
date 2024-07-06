@@ -3,7 +3,7 @@ button.addEventListener('click', function (event) {
     event.preventDefault();
 
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    const url = 'http://127.0.0.1:8000/user/login/sendData/';
+    const url = baseURL + '/user/login/sendData/';
     const data = {
         email: document.getElementById('floatingInputEmail').value,
         password: document.getElementById('floatingInputPasswd').value,
@@ -25,7 +25,7 @@ button.addEventListener('click', function (event) {
             let message = JSON.stringify(data['message'])
             if (message === '"accept"') {
                 errorBox.innerHTML = ''
-                window.location.href = 'http://127.0.0.1:8000/'
+                window.location.href = baseURL
             } else {
                 errorBox.innerHTML = message.replace(/\"/g, "")
             }

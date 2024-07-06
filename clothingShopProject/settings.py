@@ -25,6 +25,14 @@ SECRET_KEY = 'django-insecure-4e9r&88)&@oa5z=8d)$!mm0hvs^duw*w56gd==yp2()$4l7zxg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'clothingshopwebsite@gmail.com'
+EMAIL_HOST_PASSWORD = 'wwotsbiahdvogogw'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -43,7 +51,8 @@ INSTALLED_APPS = [
     'homeModule',
     'productsModule',
     'usersModule',
-    'usersPanelModule'
+    'usersPanelModule',
+    'cartModule'
 ]
 
 REST_FRAMEWORK = {

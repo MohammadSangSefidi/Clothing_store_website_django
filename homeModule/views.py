@@ -1,3 +1,4 @@
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.views import View
 from productsModule.models import ProductsImagesModel
@@ -10,8 +11,8 @@ from homeModule.authentication import TokenAuthenticationCustom
 from .models import *
 from productsModule.models import ProductsModel
 from productsModule.serializers import ProductsSerializer
-
-
+from usersModule.models import UsersModel
+from cartModule.models import CartsItemsModel
 # from rest_framework.authentication import TokenAuthentication
 
 # Create your views here.
@@ -24,7 +25,7 @@ class HomePageView(View):
         })
 
     def post(self, request):
-        pass
+        return render(request, 'home-page.html')
 
 
 class AmazingProductsAPIView(APIView):
@@ -57,7 +58,7 @@ class NotFoundView(View):
         return render(request, '404.html')
 
     def post(self, request):
-        pass
+        return render(request, '404.html')
 
 
 class AboutUsView(View):
@@ -65,11 +66,21 @@ class AboutUsView(View):
         return render(request, 'about-us.html')
 
     def post(self, request):
-        pass
+        return render(request, 'about-us.html')
 
 
-def headerPartialView(request):
-    return render(request, 'base/header.html')
+def headerPartialView(request:HttpRequest):
+    if request.user.is_authenticated:
+        user = UsersModel.objects.filter(id=request.user.id).first()
+        cart = user.cartmodel_set.filter(is_paid=False).first()
+        if cart is not None:
+            return render(request, 'base/header.html', {
+                'cartCount': CartsItemsModel.objects.filter(cart=cart).count()
+            })
+
+    return render(request, 'base/header.html', {
+        'cartCount': 0
+    })
 
 
 def footerPartialView(request):

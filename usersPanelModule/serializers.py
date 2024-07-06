@@ -1,3 +1,4 @@
+from cartModule.models import CartModel
 from .models import AddressModel
 from rest_framework import serializers
 

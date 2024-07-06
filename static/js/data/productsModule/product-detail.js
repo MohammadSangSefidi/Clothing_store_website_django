@@ -11,12 +11,16 @@ let comment_count = document.getElementById('comment-count')
 let score_average = document.getElementById('score-average')
 let image_slider = document.getElementById('image-slider')
 let big_image_slider = document.getElementById('big-image-slider')
+let countDiv = document.getElementById('count-div')
 
 let favotiteButton = document.getElementById('favorite-button')
 
+let addToCartButton = document.getElementById('add-to-cart-button')
+let addToCartInput = document.getElementById('add-to-cart-input')
+
 let userId = document.getElementById('is-login').value
 
-let productsEndpoint = `http://127.0.0.1:8000/products/detail/${slug}/gotProduct/`
+let productsEndpoint = baseURL + `/products/detail/${slug}/gotProduct/`
 let productsOption = {
     method: "GET",
     headers: {
@@ -55,36 +59,59 @@ fetch(productsEndpoint, productsOption)
             products_info.innerHTML = products_info.innerHTML + `<li class="nav item"><span>فروشنده:</span><strong>ندارد</strong></li>`
         }
         if (data.size !== null) {
+            let sizeNum = 1
             for (let size of data.size) {
-                sizes_div.innerHTML = sizes_div.innerHTML + `<input type="radio" class="btn-check" name="options" id="option4"
-                                           autocomplete="off">
-                                    <label class="btn " for="option4">
+                if (sizeNum === 1) {
+                    sizes_div.innerHTML = sizes_div.innerHTML + `<input type="radio" class="btn-check" name="sizes" id="size${sizeNum}"
+                                           autocomplete="off" value="${size.id}" checked>
+                                    <label class="btn " for="size${sizeNum}">
                                         ${JSON.stringify(size.title).replace(/\"/g, "")}
                                     </label>`
+                } else {
+                    sizes_div.innerHTML = sizes_div.innerHTML + `<input type="radio" class="btn-check" name="sizes" id="size${sizeNum}"
+                                           autocomplete="off" value="${size.id}">
+                                    <label class="btn " for="size${sizeNum}">
+                                        ${JSON.stringify(size.title).replace(/\"/g, "")}
+                                    </label>`
+                }
+                sizeNum += 1
             }
         } else {
-            sizes_div.innerHTML = sizes_div.innerHTML + `<input type="radio" class="btn-check" name="options" id="option4"
-                                           autocomplete="off">
-                                    <label class="btn " for="option4">
+            sizes_div.innerHTML = sizes_div.innerHTML + `<input type="radio" class="btn-check" name="sizes" id="size1"
+                                           autocomplete="off" disabled>
+                                    <label class="btn " for="size1">
                                         ندارد
                                     </label>`
         }
         if (data.color !== null) {
+            let colorNum = 1
             for (let color of data.color) {
-                colors_div.innerHTML = colors_div.innerHTML + `<input type="radio" class="btn-check" name="options" id="option4"
-                                           autocomplete="off">
-                                    <label class="btn " for="option4">
+                if (colorNum === 1) {
+                    colors_div.innerHTML = colors_div.innerHTML + `<input type="radio" class="btn-check" name="colors" id="color${colorNum}"
+                                           autocomplete="off" value="${color.id}" checked>
+                                    <label class="btn " for="color${colorNum}">
                                         <span style="background-color: #${color.colorCode};"></span>
                                         ${JSON.stringify(color.title).replace(/\"/g, "")}
                                     </label>`
+                }
+                else {
+                    colors_div.innerHTML = colors_div.innerHTML + `<input type="radio" class="btn-check" name="colors" id="color${colorNum}"
+                                           autocomplete="off" value="${color.id}">
+                                    <label class="btn " for="color${colorNum}">
+                                        <span style="background-color: #${color.colorCode};"></span>
+                                        ${JSON.stringify(color.title).replace(/\"/g, "")}
+                                    </label>`
+                }
+                colorNum += 1
             }
         } else {
-            colors_div.innerHTML = colors_div.innerHTML + `<input type="radio" class="btn-check" name="options" id="option4"
-                                           autocomplete="off">
-                                    <label class="btn " for="option4">
+            colors_div.innerHTML = colors_div.innerHTML + `<input type="radio" class="btn-check" name="colors" id="color1"
+                                           autocomplete="off" disabled>
+                                    <label class="btn " for="color1">
                                         ندارد
                                     </label>`
         }
+        countDiv.innerHTML = `${data.count} عدد باقی مانده در انبار`
         price_div.innerHTML = `${data.price - (data.price * (data.discount + data.amazing) / 100)} تومان`
         info_div.innerHTML = data.shortDes
         comment_count.innerHTML = data.commentsCount
@@ -102,6 +129,18 @@ fetch(productsEndpoint, productsOption)
                                             </div>`
         }
 
+        addToCartButton.addEventListener('click', function (event) {
+            event.preventDefault()
+            let sizeId = null
+            if (data.size !== null){
+                sizeId = document.querySelector('input[name="sizes"]:checked').value
+            }
+            let colorId = null
+            if (data.color !== null){
+                colorId = document.querySelector('input[name="colors"]:checked').value
+            }
+            add_to_cart(userId, data.id, addToCartInput.value, colorId, sizeId)
+        })
     })
 
 
