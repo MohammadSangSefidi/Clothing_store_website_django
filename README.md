@@ -41,4 +41,4 @@
 
 ## Contact
 
-Mohammad Sang Sefidi - [@Linkedin]([www.linkedin.com/in/mohsen-sang-sefidi-67624a217](https://www.linkedin.com/in/mohammad-sang-sefidi-784134309?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BOabXb1kIRveBY0pp8%2BM%2BqQ%3D%3D)) - [@Telegram](https://t.me/Mohammad_Sang_Sefidi) - mohammad.sangsefidi14k@gmail.com
+Mohammad Sang Sefidi - [@Linkedin](https://www.linkedin.com/in/mohammad-sang-sefidi-784134309?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BOabXb1kIRveBY0pp8%2BM%2BqQ%3D%3D)) - [@Telegram](https://t.me/Mohammad_Sang_Sefidi) - mohammad.sangsefidi14k@gmail.com
