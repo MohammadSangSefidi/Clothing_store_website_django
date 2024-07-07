@@ -31,7 +31,7 @@ let favoritesText = document.getElementById('favorites-text')
 let favoritesButtonMobile = document.getElementById('favorites-button-mobile')
 let favoritesTextMobile = document.getElementById('favorites-text-mobile')
 
-
+let closeButton = document.getElementById('close-button')
 
 let activePage = orders
 
@@ -75,6 +75,7 @@ function changePage(button, text, page, is_mobile) {
         if (is_mobile){
             activeButtonMobile = button
             activeTextMobile = text
+            closeButton.click()
         }
         else {
             activeButton = button

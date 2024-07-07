@@ -116,7 +116,7 @@ class AddToCartAPIView(APIView):
                                 else:
                                     return Response({'message': 'موجودی محصول کافی نیست.'})
 
-                            return Response({'message': 'accept'})
+                            return Response({'message': 'accept', 'cart_count': cart.cartsitemsmodel_set.count()})
                         else:
                             return Response({'message': 'موجودی محصول کافی نیست.'})
                     else:

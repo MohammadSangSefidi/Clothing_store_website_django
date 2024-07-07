@@ -105,7 +105,7 @@ async function add_products(data, list, userId) {
                                                                             data-bs-placement="top"
                                                                             data-bs-title="مشاهده سریع"><i
                                                             class="bi bi-search"></i></a></li>
-                                                    <li class="nav-item"><a href="http://127.0.0.1:8000/products/detail/${slug.replace(/\"/g, "")}/"
+                                                    <li class="nav-item"><a href="${baseURL}/products/detail/${slug.replace(/\"/g, "")}/"
                                                                             class="nav-item product-box-hover-item product-box-hover-item-btn mx-3"
                                                                             data-bs-toggle="tooltip"
                                                                             data-bs-placement="top"

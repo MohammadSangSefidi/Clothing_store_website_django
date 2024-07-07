@@ -42,7 +42,7 @@ fetch(amazing_sliderEndpoint, amazing_sliderOption)
                                     </div>
                                     <div class="product-action">
                                         <div class="link">
-                                            <a class="btn border-0 rounded-3 main-color-one-bg" href="http://127.0.0.1:8000/products/detail/${product.slug}/">
+                                            <a class="btn border-0 rounded-3 main-color-one-bg" href="${baseURL}/products/detail/${product.slug}/">
                                                 <i class="bi bi-basket text-white"></i>
                                             </a>
                                         </div>

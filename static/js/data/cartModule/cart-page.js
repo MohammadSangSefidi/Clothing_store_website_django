@@ -61,7 +61,7 @@ fetch(cartEndpoint, cartOption)
                                                     </a>
                                                 </td>
                                                 <td colspan="2" class="text-center align-middle">
-                                                    <a href="http://127.0.0.1:8000/products/detail/${item.product.slug}/">
+                                                    <a href="${baseURL}/products/detail/${item.product.slug}/">
                                                         <img src="${product_image}" width="100"
                                                              alt="">
                                                     </a>

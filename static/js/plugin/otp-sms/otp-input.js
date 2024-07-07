@@ -32,7 +32,7 @@ window.addEventListener("load", function () {
                 let message = JSON.stringify(data['message'])
                 if (message === '"accept"') {
                     errorBox.innerHTML = ''
-                    window.location.href = 'http://127.0.0.1:8000/user/login/'
+                    window.location.href = `${baseURL}/user/login/`
                 } else {
                     errorBox.innerHTML = message
                 }

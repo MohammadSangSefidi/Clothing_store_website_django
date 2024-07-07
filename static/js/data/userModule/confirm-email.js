@@ -12,7 +12,6 @@ input.addEventListener('input', function (event) {
         emailActivateCode: document.getElementById('otp-value').value,
         csrfmiddlewaretoken: csrfToken
     };
-    console.log(data)
     fetch(url, {
         method: 'POST',
         headers: {

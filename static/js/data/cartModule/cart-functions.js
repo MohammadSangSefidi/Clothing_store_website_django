@@ -28,6 +28,7 @@ function add_to_cart(userId, productId, count, colorId, sizeId) {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                document.getElementById('cart-count').innerHTML = data.cart_count
             } else {
                 Swal.fire({
                     position: "center",
